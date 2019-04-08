@@ -21,7 +21,8 @@ $rows_customer = $obj_customer->read();
 if($customer_id == ""){
     $customer_id = $rows_customer[0]['customer_id'];
 }
-$rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND s.customer_id = {$customer_id} AND s.delivery_status_id <> 1 ");
+$rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} AND s.delivery_status_id <> 1 ");
+// $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND s.customer_id = {$customer_id} AND s.delivery_status_id <> 1 ");
 //var_dump($rows);
 	// $strDate = "2008-08-14 13:42:44";
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);

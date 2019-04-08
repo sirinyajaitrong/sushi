@@ -67,7 +67,7 @@ $password = $_REQUEST["password"];
 									$_SESSION["email"] = $row['email'];
 									$_SESSION["status"] = $row['status'];
 									$_SESSION["users_status_name"] = $row['users_status_name'];
-									$_SESSION["user_id"] = $row['id'];
+									$_SESSION["users_id"] = $row['users_id'];
 								}
 							redirect("index.php?viewName=home");
 							} 

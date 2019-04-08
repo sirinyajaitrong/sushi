@@ -76,7 +76,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
         </div>
 
         <div class="col-md-1">
-        <button type="button" class="btn btn-primary" onclick="search()">ค้นหา</button>
+        <button type="button" class="btn btn-primary" onclick="search()" style="margin-top:24px;">ค้นหา</button>
         </div>
         <div class="col-md-6">
         </div>
@@ -92,7 +92,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                         <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >ประวัติการขายสินค้า</div>                     
                     </div>     
                     <br />
-                    <div class="table-responsive center" style="width: 1000px;margin-left:130px;">
+                    <div class="table-responsive center" style="width: 1200px;margin-left:20px;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
                             <tr class="success">
@@ -100,14 +100,16 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                 <th class="text-center">รหัสสินค้า</th>       
                                 <th class="text-center">ชื่อสินค้า</th> 
                                 <th class="text-center">ชื่อลูกค้า</th>  
-                                <th class="text-center">วันที่ขายสินค้า</th>          
+                                <th class="text-center">วันที่ขายสินค้า</th>     
+                                <th class="text-center"  style="width: 100px;">จำนวนขาย</th>     
                                 <!-- <th class="text-center">สี</th>
                                 <th class="text-center">ประเภท</th> -->
                                 <!-- <th class="text-center">รูปภาพ</th> -->
-                                <!-- <th class="text-center">ราคา</th>
-                                <th class="text-center">ต้นทุน</th> -->
-                                <th class="text-center"  style="width: 100px;">จำนวนที่ขาย</th>
+                                <th class="text-center">ราคาขาย</th>
+                                <th class="text-center">ราคาทุน</th>
                                 <th class="text-center">ยอดขาย</th>
+                                <th class="text-center">ทุนขาย</th>
+                                <th class="text-center">กำไรขาย</th>
                                 <?php if($_SESSION["status"] != "2"){ ?>
                                 <th class="text-center">จัดการ</th>
                                 <?php } ?>
@@ -123,16 +125,17 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                         <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
                                         <td class="text-center" style="width: 90px;">pro<?= $row_sell["products_id"] ?></td>
                                         <td class="text-center" style="width: 120px;"><?= $row_sell["products_name"] ?></td>
-                                        <td class="text-center" style="width: 200px;"><?= $row_sell["customer_name"] ?></td>
+                                        <td class="text-center" style="width: 180px;"><?= $row_sell["customer_name"] ?></td>
                                         <td class="text-center" style="width: 140px;"><?= DateThai($row_sell["date"]) ?></td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]) ?> แพ็ค</td>
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_sell["color_name"] ?></td>
                                         <td class="text-center"><?= $row_sell["products_type_name"] ?></td> -->
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_sell['pic'] ?>')" src="./upload_img/<?= $row_sell["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
-                                        <!-- <td class="text-center"><?= $row["price"] ?> บาท</td>
-                                        <td class="text-center"><?= $row["price"] ?> บาท</td> -->
-                                        <td class="text-right" style="width: 100px;"><?= number_format($row_sell["sell_quantity"]) ?> แพ็ค</td>
-                                        <td class="text-right" style="width: 100px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> บาท</td>
-                                        
+                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["price"], 2) ?> บาท</td>
+                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["cost"], 2) ?> บาท</td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> บาท</td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["cost"],2) ?> บาท</td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*($row_sell["price"]-$row_sell["cost"]),2) ?> บาท</td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
                                             <a href="#" data-href="conSell.php?action=delete&sell_id=<?= $row_sell["sell_id"] ?>&customer_id=<?= $customer_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
@@ -355,15 +358,13 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
     }
 
     function onPrint(){
-        var e = document.getElementById("customer_id");
-        var customer_id = e.options[e.selectedIndex].value;
+        var dateFrom = $("#dateFrom").val();
+        var dateTo = $("#dateTo").val();
         var report = "reportPdf.php";
-        if(customer_id != "001"){
-            report = "reportPdf.php";
-        }
+
         //window.location.replace("sellPdf.php?customer_id="+customer_id, '_blank');
         window.open(
-            report+'?customer_id='+customer_id,
+            report+'?dateFrom='+dateFrom+"&dateTo="+dateTo,
             '_blank' // <- This is what makes it open in a new window.
         );
     }
@@ -381,7 +382,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
     function search(){
         var dateFrom = $("#dateFrom").val();
         var dateTo = $("#dateTo").val();
-        window.location.replace("?viewName=reportPdf&dateFrom="+dateFrom+"&dateTo="+dateTo);
+        window.location.replace("?viewName=sellReport&dateFrom="+dateFrom+"&dateTo="+dateTo);
     }
 </script>
 <script>

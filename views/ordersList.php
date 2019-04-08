@@ -21,7 +21,8 @@ $rows_store = $obj_store->read($search);
 if($store_id == ""){
     $store_id = $rows_store[0]['store_id'];
 }
-$rows_orders = $obj_orders->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND o.store_id = {$store_id} ");
+$rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
+// $rows_orders = $obj_orders->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND o.store_id = {$store_id} ");
 //var_dump($rows);
 	// $strDate = "2008-08-14 13:42:44";
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);

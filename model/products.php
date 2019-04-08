@@ -8,8 +8,8 @@ class Products {
         $conn = new createCon();
         $con = $conn->connect();
         mysqli_query($con,"SET NAMES 'utf8'");
-        $this->sql = "INSERT INTO products (`color_id`, `products_name`, `pic`, `price`, `cost`, `mfd`,`exd`)
-         VALUES ({$data["color_id"]}, '{$data["products_name"]}', '{$data["pic"]}', {$data["price"]}, {$data["cost"]}, '{$data["mfd"]}', '{$data["exd"]}' )";
+        $this->sql = "INSERT INTO products (`color_id`, `products_name`, `pic`, `price`, `cost`, `mfd`,`exd`, products_type_id)
+         VALUES ({$data["color_id"]}, '{$data["products_name"]}', '{$data["pic"]}', {$data["price"]}, {$data["cost"]}, '{$data["mfd"]}', '{$data["exd"]}', {$data["products_type_id"]} )";
 		$query = mysqli_query($con, $this->sql);
         if ($query) {
             return true;
