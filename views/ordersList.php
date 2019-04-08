@@ -101,7 +101,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                         <td class="text-center"><?= $row["cost"] ?> บาท</td> -->
                                         <td class="text-right" style="width: 100px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
                                         <td class="text-right" style="width: 100px;"><?= number_format($row_orders["stock_quantity"]*$row_orders["cost"],2) ?> บาท</td>
-                                        <td class="text-center" style="width: 140px;"><?= DateThai($row_orders["date"]) ?></td>
+                                        <td class="text-center" style="width: 140px;"><?= DateThaiTime($row_orders["date"]) ?></td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
                                             <a href="#" data-href="conOrders.php?action=delete&orders_id=<?= $row_orders["orders_id"] ?>&store_id=<?= $store_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">

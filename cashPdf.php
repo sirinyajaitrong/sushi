@@ -29,7 +29,7 @@ $obj_sell = new Sell();
 $obj_customer = new customer();
 
 $customer_id = !empty($_REQUEST["customer_id"]) ?  $_REQUEST["customer_id"] : "001";
-$rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND s.customer_id = {$customer_id} AND s.delivery_status_id <> 1 ");
+$rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND s.customer_id = {$customer_id} "); ///AND s.delivery_status_id <> 1
 
 $rows_customer =  $obj_customer->read(" customer_id = {$customer_id} ");
 $row_customer = $rows_customer[0];

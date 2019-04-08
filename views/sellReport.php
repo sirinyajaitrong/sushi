@@ -126,7 +126,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                         <td class="text-center" style="width: 90px;">pro<?= $row_sell["products_id"] ?></td>
                                         <td class="text-center" style="width: 120px;"><?= $row_sell["products_name"] ?></td>
                                         <td class="text-center" style="width: 180px;"><?= $row_sell["customer_name"] ?></td>
-                                        <td class="text-center" style="width: 140px;"><?= DateThai($row_sell["date"]) ?></td>
+                                        <td class="text-center" style="width: 140px;"><?= DateThaiTime($row_sell["date"]) ?></td>
                                         <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]) ?> แพ็ค</td>
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_sell["color_name"] ?></td>
                                         <td class="text-center"><?= $row_sell["products_type_name"] ?></td> -->

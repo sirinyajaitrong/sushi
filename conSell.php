@@ -13,7 +13,8 @@ $obj = new Sell();
     "products_id" => !empty($_REQUEST["products_id"]) ?  $_REQUEST["products_id"] : "",
     "customer_id" => !empty($_REQUEST["customer_id"]) ?  $_REQUEST["customer_id"] : "",
     "sell_quantity" => !empty($_REQUEST["sell_quantity"]) ?  $_REQUEST["sell_quantity"] : "",
-    "sell_id" => !empty($_REQUEST["sell_id"]) ?  $_REQUEST["sell_id"] : ""
+    "sell_id" => !empty($_REQUEST["sell_id"]) ?  $_REQUEST["sell_id"] : "",
+    "pay" => !empty($_REQUEST["pay"]) ?  $_REQUEST["pay"] : ""
     );
 
 $r = false;
@@ -21,8 +22,12 @@ switch ($action) {
     case "add":
         $r = $obj->insert($data);
         break;
+    case "add_pay":
+        $r = $obj->update_pay($data, " sell_id = {$data["sell_id"]} ");
+    break;
     case "edit":
-        $r = $obj->update($data, " customer_id = {$data["customer_id"]} AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ");
+        // $r = $obj->update($data, " customer_id = {$data["customer_id"]} AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ");
+        $r = $obj->update($data, " customer_id = {$data["customer_id"]} ");
         break;
     case "delete":
         $r = $obj->delete(" sell_id = {$data["sell_id"]} ");

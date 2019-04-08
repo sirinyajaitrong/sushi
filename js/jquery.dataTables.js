@@ -14574,7 +14574,7 @@
 									break;
 	
 								default:
-									btnDisplay = button + 1;
+									btnDisplay = button + 1+'       ';   //วรรคตัวเลข
 									btnClass = page === button ?
 										classes.sPageButtonActive : '';
 									break;

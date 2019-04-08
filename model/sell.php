@@ -59,6 +59,24 @@ class Sell {
         $conn->close();
     }
 
+    public function update_pay($data, $condition) {
+        $conn = new createCon();
+        $con = $conn->connect();
+
+        $this->sql = "UPDATE sell SET pay = pay + {$data["pay"]}, date_pay = NOW() WHERE {$condition} ";    
+       
+        mysqli_query($con,"SET NAMES 'utf8'"); 
+		$query = mysqli_query($con,$this->sql);   
+		
+        if ($query){
+			return true;
+		}else{
+			return false;
+        }
+        
+        $conn->close();
+    }
+
     public function delete($condition) {
         $conn = new createCon();
         $con = $conn->connect();
@@ -84,6 +102,7 @@ class Sell {
           LEFT OUTER JOIN color c ON p.color_id = c.color_id 
           LEFT OUTER JOIN products_type pt ON p.products_type_id = pt.products_type_id  
           LEFT OUTER JOIN customer cus ON s.customer_id = cus.customer_id   
+          LEFT OUTER JOIN delivery_status ds ON s.delivery_status_id = ds.delivery_status_id   
           WHERE $condition ORDER BY date DESC";
           mysqli_query($con,"SET NAMES 'utf8'");
         $query = mysqli_query($con,$this->sql);
