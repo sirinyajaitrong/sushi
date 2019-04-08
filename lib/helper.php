@@ -2,7 +2,7 @@
 
 function requireLogin() {
     if (empty($_SESSION["logedIn"])) {
-        header("location: login.php");
+        header("location: home.php");
     }
 }
 
