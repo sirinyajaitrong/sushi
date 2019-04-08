@@ -149,5 +149,10 @@ $rows = $obj->read($search);
     $('#confirm-delete').on('show.bs.modal', function(e) {
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
-
+</script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.2').addClass('ac');
+    })
 </script>

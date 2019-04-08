@@ -291,3 +291,9 @@ $rows_stock = $obj_stock->read();
         // alert(store_id);stock_quantity
     }
 </script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.5').addClass('ac');
+    })
+</script>

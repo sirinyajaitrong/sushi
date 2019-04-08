@@ -383,5 +383,10 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
         var dateTo = $("#dateTo").val();
         window.location.replace("?viewName=reportPdf&dateFrom="+dateFrom+"&dateTo="+dateTo);
     }
-
+</script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.7').addClass('ac');
+    })
 </script>

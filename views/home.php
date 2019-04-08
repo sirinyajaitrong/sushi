@@ -12,3 +12,10 @@
     </div>
     
 </div>
+
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.1').addClass('ac');
+    })
+</script>

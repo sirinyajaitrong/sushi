@@ -326,5 +326,10 @@ $rows_orders = $obj_orders->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NO
             '_blank' // <- This is what makes it open in a new window.
         );
     }
-
+</script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.4').addClass('ac');
+    })
 </script>

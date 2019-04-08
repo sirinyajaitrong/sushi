@@ -345,5 +345,10 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),
         // alert($('#products_id').val());
         // alert(customer_id);sell_quantity
     }
-
+</script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.6').addClass('ac');
+    })
 </script>

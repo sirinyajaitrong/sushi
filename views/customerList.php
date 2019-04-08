@@ -148,3 +148,9 @@ $rows = $obj->read($search);
     }
 
 </script>
+<script>
+    $(function(){
+        $('.nav li').removeClass('ac');
+        $('.3').addClass('ac');
+    })
+</script>
