@@ -62,30 +62,34 @@ $rows_stock = $obj_stock->read();
                 if ($rows != false) {
                     $count = 1;
                     foreach ($rows as $row) {
+                        if($row["stock"] < 6){
                         ?>
-                        <tr>
+                            <tr class="danger">
+                        <?php }else{ ?>
+                            <tr>
+                        <?php } ?>
                             <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
-                            <td class="text-center" style="width: 90px;">pro<?= $row["products_id"] ?></td>
-                            <td class="text-center" style="width: 120px;"><?= $row["products_name"] ?></td>
+                            <td class="text-center" style="width: 90px;"><?= $row["products_id"] ?></td>
+                            <td class="text-center" style="width: 140px;"><?= $row["products_name"] ?></td>
                             <td class="text-center" style="width: 5px;"><?= $row["color_name"] ?></td>
                             <td class="text-center"><?= $row["products_type_name"] ?></td>
                             <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row['pic'] ?>')" src="./upload_img/<?= $row["pic"] ?>" width="40px;" height="40px" alt=""></td>
                             <td class="text-center"><?= $row["price"] ?> บาท</td>
                             <td class="text-center"><?= $row["cost"] ?> บาท</td>
-                            <td class="text-center" style="width: 140px;"><?= DateThai($row["mfd"]) ?></td>
-                            <td class="text-center" style="width: 140px;"><?= DateThai($row["exd"]) ?></td>
-                            <td class="text-center" style="width: 100px;"><?= $row["stock"] ?> แพ็ค</td>
+                            <td class="text-center" style="width: 150px;"><?= DateThai($row["mfd"]) ?></td>
+                            <td class="text-center" style="width: 150px;"><?= DateThai($row["exd"]) ?></td>
+                            <td class="text-center" style="width: 90px;"><?= $row["stock"] ?> แพ็ค</td>
                             <?php if($_SESSION["status"] != "2"){ ?>
                             <td>
                                 <a href="index.php?viewName=editProducts&products_id=<?= $row["products_id"] ?>" class="btn btn-sm btn-success f16">
                                     แก้ไข
                                 </a>
-                                <a href="#" data-href="conProducts.php?action=delete&products_id=<?= $row["products_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
+                                <!-- <a href="#" data-href="conProducts.php?action=delete&products_id=<?= $row["products_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
                                                                                             ลบ
-                                </a>
-                                <button onclick="AddStock('<?= $row["products_name"] ?>', '<?= $row["products_id"] ?>')" class="btn btn-sm btn-info f16">
+                                </a> -->
+                                <!-- <button onclick="AddStock('<?= $row["products_name"] ?>', '<?= $row["products_id"] ?>')" class="btn btn-sm btn-info f16">
                                     +stock
-                                </button>
+                                </button> -->
                             </td>
                             <?php } ?>
                         </tr>
@@ -96,23 +100,23 @@ $rows_stock = $obj_stock->read();
                
             </tbody>
         </table>
-        <div class="col-md-12 pull-right">
+        <!-- <div class="col-md-12 pull-right">
           <?php if($_SESSION["status"] != "2"){ ?>
           <a href="index.php?viewName=addProducts" class="btn  btn-sm btn-primary pull-right f16">เพิ่มสินค้า</a>
           <?php } ?>
-       </div>
+       </div> -->
     </div>
 </div>
 
 
-<div class="container">    
+<!-- <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >ประวัติการเพิ่มสต็อกสินค้า</div>                     
                     </div>     
                     <br />
-                    <div class="table-responsive center" style="width: 1000px;margin-left:130px;">
+                    <div class="table-responsive center" style="width: 1200px;margin-left:20px;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
                             <tr class="success">
@@ -120,11 +124,7 @@ $rows_stock = $obj_stock->read();
                                 <th class="text-center">รหัสสินค้า</th>       
                                 <th class="text-center">ชื่อสินค้า</th> 
                                 <th class="text-center">ชื่อร้านค้า</th>            
-                                <!-- <th class="text-center">สี</th>
-                                <th class="text-center">ประเภท</th> -->
                                 <th class="text-center">รูปภาพ</th>
-                                <!-- <th class="text-center">ราคา</th>
-                                <th class="text-center">ต้นทุน</th> -->
                                 <th class="text-center">สต็อก</th>
                                 <th class="text-center">วันที่สินค้าเข้า</th>
                                 <?php if($_SESSION["status"] != "2"){ ?>
@@ -140,16 +140,12 @@ $rows_stock = $obj_stock->read();
                                     ?>
                                     <tr>
                                         <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
-                                        <td class="text-center" style="width: 90px;">pro<?= $row_stock["products_id"] ?></td>
-                                        <td class="text-center" style="width: 120px;"><?= $row_stock["products_name"] ?></td>
+                                        <td class="text-center" style="width: 150px;"><?= $row_stock["products_id"] ?></td>
+                                        <td class="text-center" style="width: 200px;"><?= $row_stock["products_name"] ?></td>
                                         <td class="text-center" style="width: 200px;"><?= $row_stock["store_name"] ?></td>
-                                        <!-- <td class="text-center" style="width: 5px;"><?= $row_stock["color_name"] ?></td>
-                                        <td class="text-center"><?= $row_stock["products_type_name"] ?></td> -->
                                         <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_stock['pic'] ?>')" src="./upload_img/<?= $row_stock["pic"] ?>" width="40px;" height="40px" alt=""></td>
-                                        <!-- <td class="text-center"><?= $row["price"] ?> บาท</td>
-                                        <td class="text-center"><?= $row["cost"] ?> บาท</td> -->
-                                        <td class="text-center" style="width: 100px;"><?= $row_stock["stock_quantity"] ?> แพ็ค</td>
-                                        <td class="text-center" style="width: 140px;"><?= DateThai($row_stock["date"]) ?></td>
+                                        <td class="text-center" style="width: 200px;"><?= $row_stock["stock_quantity"] ?> แพ็ค</td>
+                                        <td class="text-center" style="width: 200px;"><?= DateThaiTime($row_stock["date"]) ?></td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
                                             <a href="#" data-href="conStock.php?action=delete&stock_id=<?= $row_stock["stock_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
@@ -169,7 +165,7 @@ $rows_stock = $obj_stock->read();
 
             </div>               
          </div> 
-</div>
+</div> -->
 
 
 <!-- <a href="#" data-href="delete.php?id=23" data-toggle="modal" data-target="#confirm-delete">Delete record #23</a>

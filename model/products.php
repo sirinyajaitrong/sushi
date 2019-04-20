@@ -8,11 +8,11 @@ class Products {
         $conn = new createCon();
         $con = $conn->connect();
         mysqli_query($con,"SET NAMES 'utf8'");
-        $this->sql = "INSERT INTO products (`color_id`, `products_name`, `pic`, `price`, `cost`, `mfd`,`exd`, products_type_id)
-         VALUES ({$data["color_id"]}, '{$data["products_name"]}', '{$data["pic"]}', {$data["price"]}, {$data["cost"]}, '{$data["mfd"]}', '{$data["exd"]}', {$data["products_type_id"]} )";
+        $this->sql = "INSERT INTO products (`color_id`, `products_name`, `pic`, `price`, `cost`, `mfd`,`exd`, products_type_id, stock)
+         VALUES ({$data["color_id"]}, '{$data["products_name"]}', '{$data["pic"]}', {$data["price"]}, {$data["cost"]}, '{$data["mfd"]}', '{$data["exd"]}', {$data["products_type_id"]}, {$data["stock"]} )";
 		$query = mysqli_query($con, $this->sql);
         if ($query) {
-            return true;
+            return  mysqli_insert_id($con);
         } else {
             return  $this->sql;
         }
@@ -35,6 +35,7 @@ class Products {
             price = {$data["price"]}, 
             cost = {$data["cost"]}, 
             mfd = '{$data["mfd"]}', 
+            stock = '{$data["stock"]}',
             exd = '{$data["exd"]}' 
             WHERE {$condition} ";    
         }else{
@@ -45,9 +46,30 @@ class Products {
             price = {$data["price"]}, 
             cost = {$data["cost"]}, 
             mfd = '{$data["mfd"]}', 
+            stock = '{$data["stock"]}',
             exd = '{$data["exd"]}'
             WHERE {$condition} ";      
         }  
+        mysqli_query($con,"SET NAMES 'utf8'"); 
+		$query = mysqli_query($con,$this->sql);   
+		
+        if ($query){
+			return true;
+		}else{
+			return $this->sql;
+        }
+        
+        $conn->close();
+    }
+
+    public function update_return($data, $condition) {
+        $conn = new createCon();
+        $con = $conn->connect();
+
+            $this->sql = "UPDATE products  
+            SET stock = stock + {$data["sell_quantity"]} 
+            WHERE {$condition} ";    
+
         mysqli_query($con,"SET NAMES 'utf8'"); 
 		$query = mysqli_query($con,$this->sql);   
 		
@@ -82,7 +104,7 @@ class Products {
 
         $this->sql = "SELECT * FROM  products p LEFT OUTER JOIN color c ON p.color_id = c.color_id 
           LEFT OUTER JOIN products_type pt ON p.products_type_id = pt.products_type_id  
-          WHERE $condition ";
+          WHERE $condition AND p.stock > 0 ";
           mysqli_query($con,"SET NAMES 'utf8'");
         $query = mysqli_query($con,$this->sql);
         if ($query) {

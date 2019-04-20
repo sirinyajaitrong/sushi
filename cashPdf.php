@@ -84,7 +84,7 @@ body{
 <span>เงินสด</span>
 <br />
 <span>วันที่  &nbsp;'.DateThai(date("Y-m-d")).'</span>
-<span style="text-align:center"><h5 style="text-align:center">เลขที่ใบสั่งซื้อสินค้า SE'.date('Ymd').'-'.$customer_id.'</h5></span>
+<span style="text-align:center"><h5 style="text-align:center">เลขที่ใบเสร็จรับเงิน CASH'.date('Ymd').'-'.$customer_id.'</h5></span>
 </h5>
 
 

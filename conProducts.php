@@ -17,7 +17,9 @@ $obj = new Products();
     "price" => !empty($_REQUEST["price"]) ?  $_REQUEST["price"] : "",
     "cost" => !empty($_REQUEST["cost"]) ?  $_REQUEST["cost"] : "",
     "mfd" => !empty($_REQUEST["mfd"]) ?  $_REQUEST["mfd"] : "",
-    "exd" => !empty($_REQUEST["exd"]) ?  $_REQUEST["exd"] : "",
+    "store_id" => !empty($_REQUEST["store_id"]) ?  $_REQUEST["store_id"] : "",
+    "stock" => !empty($_REQUEST["stock"]) ?  $_REQUEST["stock"] : "",
+    "exd" => !empty($_REQUEST["exd"]) ?  $_REQUEST["exd"] : ""
   );
 
   $currentDir = getcwd();
@@ -62,9 +64,10 @@ $obj = new Products();
       }
 //-----------------------------------------------------------------------------------
 $r = false;
+$products_id = 0;
 switch ($action) {
     case "add":
-        $r = $obj->insert($data);
+        $products_id = $obj->insert($data);
         break;
     case "edit":
         $r = $obj->update($data, " products_id = {$data["products_id"]} ");
@@ -76,8 +79,14 @@ switch ($action) {
         break;
 }
 echo $r;
-if($r){
-    redirect("index.php?viewName=productsList");
+if($r || $products_id != 0){
+    if($action == "add"){
+        $orders_sumprice = $_REQUEST["stock"] * $data['cost'];
+        // window.location.replace("conOrders.php?action=add&products_id="+products_id+"&store_id="+store_id+"&stock_quantity="+stock_quantity);
+        redirect("conOrders.php?action=add&products_id={$products_id }&store_id={$data['store_id']}&stock_quantity={$data['stock']}&orders_sumprice={$orders_sumprice}");
+    }else{
+        redirect("index.php?viewName=productsList");
+    }
 }else{
     echo $r;
 }

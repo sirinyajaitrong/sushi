@@ -7,6 +7,7 @@ $obj = new Products();
 
 $rows_color = $obj->read_color();
 $rows_products_type = $obj->read_products_type();
+$store_id = !empty($_REQUEST["store_id"]) ?  $_REQUEST["store_id"] : "";
 
 ?>
 <script type="text/javascript">
@@ -27,11 +28,12 @@ $rows_products_type = $obj->read_products_type();
                     <div class="panel-heading">
                         <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >เพิ่มสินค้า</div>                     
                     </div>     
-
+					
                     <div style="padding-top:30px" class="panel-body" >
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>        
 						<form action="conProducts.php" method="post" class="form form-horizontal" enctype="multipart/form-data">
 							<input type="hidden" id="action" name="action" value="add" />
+							<input type="hidden" id="store_id" name="store_id" value="<?= $store_id ?>" />
 							<fieldset>          
 								<div class="row">	
 									<div class="col-md-3 f16">
@@ -62,15 +64,14 @@ $rows_products_type = $obj->read_products_type();
 									</div>
 									<div class="col-md-3 f16">
 										<label>ราคา</label>
-										<input type="number" name="price" value="" class="form-control text-right" min="1" value=""  required="" />
+										<input type="number" name="price"  class="form-control text-right" min="1" value=""  required="" />
 									</div>
 								</div>
 								</br>
 								<div class="row">	
-									
 									<div class="col-md-3 f16">
 										<label>ต้นทุน</label>
-										<input type="number" name="cost" value="" class="form-control text-right" min="1" value=""  required="" />
+										<input type="number" name="cost" class="form-control text-right" min="1" value=""  required="" />
 									</div>
 									<div class="col-md-3 f16">
 										<label>วันที่ผลิต</label>
@@ -80,6 +81,13 @@ $rows_products_type = $obj->read_products_type();
 										<label>วันที่หมดอายุ</label>
 										<input type="text" id="exd" name="exd" value="" class="form-control"  required="" readonly="readonly" />
 									</div>
+									<div class="col-md-3 f16">
+										<label>จำนวน</label>
+										<input type="number" name="stock" class="form-control text-right" min="1" value=""  required="" />
+									</div>
+								</div>
+								</br>
+								<div class="row">									
 									<div class="col-md-3 f16">
 										<label>รูปภาพ</label>
 										<input type="file" name="pic" id="fileToUpload">
@@ -97,9 +105,6 @@ $rows_products_type = $obj->read_products_type();
 								</div>
 							</fieldset>
 						</form>
-
-
-
                         </div>                     
                     </div>  
         </div>               

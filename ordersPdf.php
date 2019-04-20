@@ -40,13 +40,13 @@ $content = "";
 if ($rows_orders != false) {
     $i = 1;
     foreach ($rows_orders as $row) {
-        $sum_price += $row['cost'] * $row['stock_quantity'];
+        $sum_price += $row['orders_sumprice'];
         $content .= '<tr style="border:1px solid #000;">
             <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
             <td style="border-right:1px solid #000;padding:3px;"  >'.$row['products_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['stock_quantity']).' แพ็ค</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['cost'],2).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['cost'] * $row['stock_quantity'],2).'</td>
+            <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['orders_sumprice'],2).'</td>
         </tr>';
         $i++;
     }

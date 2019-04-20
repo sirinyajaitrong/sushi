@@ -11,19 +11,20 @@ class Sell {
         mysqli_query($con,"SET NAMES 'utf8'");
 
         $this->sql = "SELECT * FROM sell WHERE customer_id = {$data["customer_id"]} AND products_id = {$data["products_id"]} 
-         AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ";
+         AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND delivery_status_id <> 1 ";
         mysqli_query($con,"SET NAMES 'utf8'");
         $query = mysqli_query($con, $this->sql);
         $num = mysqli_num_rows($query);
         if ($num > 0) {
             $result = array(); 	
-            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                $this->sql = "UPDATE sell SET sell_quantity = sell_quantity + {$data["sell_quantity"]}   
+            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) { 
+                $this->sql = "UPDATE sell SET sell_quantity = sell_quantity + {$data["sell_quantity"]},  
+                sell_sumprice = sell_sumprice + {$data["sell_sumprice"]}    
                 WHERE sell_id =  {$row['sell_id']} ";    
             }
         }else {
-            $this->sql = "INSERT INTO sell (`customer_id`, `products_id`, `sell_quantity`)
-            VALUES ({$data["customer_id"]}, {$data["products_id"]}, {$data["sell_quantity"]}) ";
+            $this->sql = "INSERT INTO sell (`customer_id`, `products_id`, `sell_quantity`, `sell_sumprice`)
+            VALUES ({$data["customer_id"]}, {$data["products_id"]}, {$data["sell_quantity"]}, {$data["sell_sumprice"]}) ";
         }
         mysqli_query($con,"SET NAMES 'utf8'"); 
         $query = mysqli_query($con, $this->sql);

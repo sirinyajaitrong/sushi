@@ -28,7 +28,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);
 ?>
 <div class="container">
-    <h3><label class="label label-warning"  >สั่งซื้อสินค้า</label></h3>
+    <h3><label class="label label-warning"  >จัดการขายสินค้า</label></h3>
     <br />
     
     <div class="row">	  
@@ -45,9 +45,11 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                 <?php } } ?>
             </select> 
         </div>
+        <?php if($_SESSION["status"] != "2"){ ?>
         <div class="col-md-1">
         <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">เลือกสินค้า</button>
         </div>
+        <?php } ?>
         <div class="col-md-6">
         </div>
         <br />
@@ -78,18 +80,19 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                                 <th class="text-center" style="width: 100px;">จำนวนขาย</th>
                                 <th class="text-center">ราคารวม</th>
                             <?php if($customer_id != "001") { ?>
-                                <th class="text-center">เงินที่จ่ายจริง</th>
+                                <th class="text-center">เงินจ่ายจริง</th>
                                 <th class="text-center" >ค้างชำระ</th>
                             <?php } ?>
-                                <th class="text-center">วันที่ขายสินค้า</th>
+                                <th class="text-center">วันที่ขาย</th>
                             <?php if($customer_id != "001") { ?>
-                                <th class="text-center">วันที่ชำระเงินล่าสุด</th>
-                                <th class="text-center">การจัดส่ง</th>
-                            <?php } ?>
-                                <?php if($_SESSION["status"] != "2"){ ?>
+                                <th class="text-center">วันที่ชำระเงิน</th>
+                                <th class="text-center">การจัดส่ง</th> 
+                            <?php } ?>                     
+                            <?php if(($customer_id != "001" && $_SESSION["status"] != "2")||($customer_id != "001" && $_SESSION["status"] == "2")) { ?>
                                 <th class="text-center">จัดการ</th>
-                                <?php } ?>
+                            <?php } ?>  
                             </tr>
+                           
                         </thead>
                         <tbody>
                         <?php
@@ -99,37 +102,40 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                                     ?>
                                     <tr>
                                         <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
-                                        <td class="text-center" style="width: 90px;">pro<?= $row_sell["products_id"] ?></td>
-                                        <td class="text-center" style="width: 120px;"><?= $row_sell["products_name"] ?></td>
+                                        <td class="text-center" style="width: 120px;"><?= $row_sell["products_id"] ?></td>
+                                        <td class="text-center" style="width: 130px;"><?= $row_sell["products_name"] ?></td>
                                         <td class="text-center" style="width: 120px;"><?= $row_sell["customer_name"] ?></td>
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_sell["color_name"] ?></td>
                                         <td class="text-center"><?= $row_sell["products_type_name"] ?></td> -->
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_sell['pic'] ?>')" src="./upload_img/<?= $row_sell["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
                                         <!-- <td class="text-center"><?= $row["price"] ?> บาท</td>
                                         <td class="text-center"><?= $row["price"] ?> บาท</td> -->
-                                        <td class="text-right" style="width: 100px;"><?= number_format($row_sell["sell_quantity"]) ?> แพ็ค</td>
-                                        <td class="text-right" style="width: 130px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> บาท</td>
+                                        <td class="text-right" style="width: 140px;"><?= number_format($row_sell["sell_quantity"]) ?> แพ็ค</td>
+                                        <td class="text-right" style="width: 120px;"><?= number_format($row_sell["sell_sumprice"],2) ?> </td>
                                     <?php if($customer_id != "001") { ?>   
-                                        <td class="text-right" style="width: 120px;"><?= number_format($row_sell["pay"],2) ?> บาท</td>
-                                        <td class="text-right" style="width: 120px;"><?= number_format(($row_sell["sell_quantity"]*$row_sell["price"])-$row_sell["pay"],2) ?> บาท</td>
+                                        <td class="text-right" style="width: 140px;"><?= number_format($row_sell["pay"],2) ?> </td>
+                                        <td class="text-right" style="width: 120px;"><?= number_format($row_sell["sell_sumprice"]-$row_sell["pay"],2) ?> </td>
                                     <?php } ?>      
-                                        <td class="text-center" style="width: 140px;"><?= DateThai($row_sell["date"]) ?></td>
+                                        <td class="text-center" style="width: 150px;"><?= DateThaiTime($row_sell["date"]) ?></td>
                                     <?php if($customer_id != "001") { ?>
-                                        <td class="text-center" style="width: 140px;"><?php if(!empty($row_sell["date_pay"])){ echo DateThaiTime($row_sell["date_pay"]); } ?></td>
-                                        <td class="text-center" style="width: 120px;"><?= $row_sell["delivery_status_name"] ?></td>
+                                        <td class="text-center" style="width: 150;"><?php if(!empty($row_sell["date_pay"])){ echo DateThaiTime($row_sell["date_pay"]); } ?></td>
+                                        <td class="text-center" style="width: 140px;"><?= $row_sell["delivery_status_name"] ?></td>
                                     <?php } ?>
-                                        <?php if($_SESSION["status"] != "2"){ ?>
-                                        <td class="text-center" style="width: 240px;">
+                                    <?php if(($customer_id != "001" && $_SESSION["status"] != "2")||($customer_id != "001" && $_SESSION["status"] == "2")) { ?>
+                                        <td class="text-center f16" style="width: 180px;">
                                             <?php if($customer_id != "001") { ?> 
-                                            <button onclick="AddPay('<?= $row_sell["sell_id"] ?>', '<?= $row_sell["products_name"] ?>', '<?= ($row_sell["sell_quantity"]*$row_sell["price"])-$row_sell["pay"] ?>')" class="btn btn-info">
-                                                ยืนยันการชำระเงิน
-                                            </button>
+                                                <button onclick="AddPay('<?= $row_sell["sell_id"] ?>', '<?= $row_sell["products_name"] ?>', '<?= $row_sell["sell_sumprice"]-$row_sell["pay"] ?>')" class="btn btn-info">
+                                                    ชำระเงิน
+                                                </button>
                                             <?php } ?>
-                                            <a href="#" data-href="conSell.php?action=delete&sell_id=<?= $row_sell["sell_id"] ?>&customer_id=<?= $customer_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
+                                            
+                                            <?php if($_SESSION["status"] != "2" && $row_sell["delivery_status_id"] != "1" && $row_sell["pay"] == 0){ ?>
+                                            <a href="#" data-href="conSell.php?action=delete&sell_id=<?= $row_sell["sell_id"] ?>&products_id=<?= $row_sell["products_id"] ?>&sell_quantity=<?= $row_sell["sell_quantity"] ?>&customer_id=<?= $customer_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
                                                                                             ลบ
-                                            </a>
-                                        </td>
-                                        <?php } ?>
+                                            </a>  
+                                            <?php } ?>
+                                        </td>    
+                                    <?php } ?>
                                     </tr>
                                     <?php
                                 }
@@ -149,11 +155,14 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                            
                         </div>
                         <div class="col-md-3">
+                        <?php if($_SESSION["status"] != "2"){ ?>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button class="btn btn-warning" onclick="onPrint()"><i class="fa fa-print"></i> พิมพ์</button>
+                        
                             <?php if($customer_id != "001"){ ?>
-                            <button id="sended" name="sended" class="btn btn-success" onclick="onUpdate()"><i class="fa fa-paper-plane"></i> จัดส่งสินค้าแล้ว</button>
+                            <button id="sended" name="sended" class="btn btn-success" onclick="onUpdate()"><i class="fa fa-paper-plane"></i> จัดส่งสินค้า</button>
                             <?php } ?>
+                        <?php } ?>
                         </div>
                         </div>
                         <br /><br /><br />
@@ -170,11 +179,27 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                 แจ้งเตือน!
             </div>
             <div class="modal-body">
-                คุณต้องการลบสินค้านี้ไหม?
+                คุณต้องลบการขายสินค้านี้ไหม?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
                 <a class="btn btn-danger btn-ok" >ลบ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="msgStock" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                แจ้งเตือน!
+            </div>
+            <div class="modal-body">
+                จำนวนสินค้าไม่เพียงพอสำหรับขาย!!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ตกลง</button>
             </div>
         </div>
     </div>
@@ -201,7 +226,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
   </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="productModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -216,10 +241,10 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                         <!-- <th class="text-center">ประเภท</th> -->
                         <!-- <th class="text-center">รูปภาพ</th> -->
                         <!-- <th class="text-center">ราคา</th> -->
-                        <th class="text-center">ต้นทุน</th>
+                        <th class="text-center">ราคา</th>
                         <th class="text-center">วันที่ผลิต</th>
                         <th class="text-center">วันหมดอายุ</th>
-                        <!-- <th class="text-center">สต็อก</th> -->
+                        <th class="text-center">สต็อก</th>
                         <?php if($_SESSION["status"] != "2"){ ?>
                         <th class="text-center">จัดการ</th>
                         <?php } ?>
@@ -233,19 +258,19 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                             ?>
                             <tr>
                                 <!-- <td class="text-center" style="width: 5px;"><?= $count++; ?></td> -->
-                                <td class="text-center" style="width: 90px;">pro<?= $row["products_id"] ?></td>
+                                <td class="text-center" style="width: 90px;"><?= $row["products_id"] ?></td>
                                 <td class="text-center" style="width: 120px;"><?= $row["products_name"] ?></td>
                                 <td class="text-center" style="width: 5px;"><?= $row["color_name"] ?></td>
                                 <!-- <td class="text-center"><?= $row["products_type_name"] ?></td>
                                 <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row['pic'] ?>')" src="./upload_img/<?= $row["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
                                 <!-- <td class="text-center"><?= $row["price"] ?> บาท</td> -->
-                                <td class="text-center"><?= number_format($row["cost"],2) ?> บาท</td>
+                                <td class="text-center"><?= number_format($row["price"],2) ?> บาท</td>
                                 <td class="text-center" style="width: 140px;"><?= DateThai($row["mfd"]) ?></td>
                                 <td class="text-center" style="width: 140px;"><?= DateThai($row["exd"]) ?></td>
-                                <!-- <td class="text-center" style="width: 100px;"><?= $row["stock"] ?> แพ็ค</td> -->
+                                <td class="text-center" style="width: 100px;"><?= $row["stock"] ?> แพ็ค</td>
                                 <?php if($_SESSION["status"] != "2"){ ?>
                                 <td class="text-center">
-                                    <button onclick="Addsell('<?= $row["products_name"] ?>', '<?= $row["products_id"] ?>')" class="btn btn-sm btn-info f16">
+                                    <button onclick="Addsell('<?= $row["products_name"] ?>', '<?= $row["products_id"] ?>', '<?= $row["price"] ?>', '<?= $row["stock"] ?>')" class="btn btn-sm btn-info f16">
                                         +ขาย
                                     </button>
                                 </td>
@@ -279,6 +304,8 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
         <div class="row">	
             <div class="col-md-4 f16"><input type="hidden" id="products_id" name="products_id" value="" /></div>
             <div class="col-md-4 f16">
+                <input type="hidden" id="price" name="price" />
+                <input type="hidden" id="stock" name="stock" />
                 <label>จำนวน</label>
                 <input type="number" id="sell_quantity" name="sell_quantity" class="form-control text-right" min="1" value="1"  required="" />
             </div>
@@ -373,9 +400,11 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
     //     window.location.replace("index.php?viewName=productsList&search="+search);
     // }
 
-    function Addsell(label, products_id){
+    function Addsell(label, products_id, price, stock){
         $('#products_id').val(products_id);
         $("#sellModalLabel").text(label);
+        $("#price").val(price);
+        $("#stock").val(stock);
 		$('#sellModal').modal('show');
     }
 
@@ -383,12 +412,31 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
         var products_id = $('#products_id').val();
         var e = document.getElementById("customer_id");
         var customer_id = e.options[e.selectedIndex].value;
-        var sell_quantity = $('#sell_quantity').val();
+        var sell_quantity = 0;
+        var stock = 0;
+        var price = 0;
 
-        window.location.replace("conSell.php?action=add&products_id="+products_id+"&customer_id="+customer_id+"&sell_quantity="+sell_quantity);
+        if($("#sell_quantity").val().trim() != ""){
+            sell_quantity = parseInt($("#sell_quantity").val().trim(), 10);
+        }
+        if($("#stock").val().trim() != ""){
+            stock = parseInt($("#stock").val().trim(), 10);
+        }
+        if($("#price").val().trim() != ""){
+            price = parseInt($("#price").val().trim(), 10);
+        }
+        
+        var sell_sumprice = sell_quantity * price;
+        // alert(sell_sumprice);
+        // alert(stock);
 
-        // alert($('#products_id').val());
-        // alert(customer_id);sell_quantity
+        if(sell_quantity > stock){
+            $('#productModal').modal('hide');
+            $('#sellModal').modal('hide');
+            $("#msgStock").modal('show');
+        }else{
+            window.location.replace("conSell.php?action=add&products_id="+products_id+"&customer_id="+customer_id+"&sell_quantity="+sell_quantity+"&sell_sumprice="+sell_sumprice);
+        }
     }
 
     function mycustomer(){

@@ -28,10 +28,11 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);
 ?>
 <div class="container">
-    <h3><label class="label label-warning"  >สั่งซื้อสินค้า</label></h3>
+    <h3><label class="label label-warning"  >จัดการสั่งซื้อสินค้า</label></h3>
     <br />
     
-    <div class="row">	  
+    <div class="row">	
+    <?php if($_SESSION["status"] != "2"){ ?>  
         <div class="col-md-1">
         <label>เลือกร้านค้า: </label>
         </div>
@@ -46,15 +47,15 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
             </select> 
         </div>
         <div class="col-md-1">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">เลือกสินค้า</button>
+        <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">สั่งซื้อสินค้า</button> -->
+        <button type="button" class="btn btn-success" onclick="AddProduct()">สั่งซื้อสินค้า</button>
         </div>
         <div class="col-md-6">
         </div>
+        <?php } ?>
         <br />
     </div>
 </div>
-
-
 <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
@@ -62,20 +63,20 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                         <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >ประวัติการสั่งซื้อสินค้า</div>                     
                     </div>     
                     <br />
-                    <div class="table-responsive center" style="width: 1000px;margin-left:130px;">
+                    <div class="table-responsive center" style="width: 1200px;margin-left:20px;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
                             <tr class="success">
-                                <th class="text-center" style="width: 5px;">ที่</th>     
-                                <th class="text-center">รหัสสินค้า</th>       
-                                <th class="text-center">ชื่อสินค้า</th> 
+                                <th class="text-center">ที่</th>     
+                                <th class="text-center" style="width: 20px;">รหัสสินค้า</th>       
+                                <th class="text-center" style="width: 40px;">ชื่อสินค้า</th> 
                                 <th class="text-center" >ชื่อร้านค้า</th>            
                                 <!-- <th class="text-center">สี</th>
                                 <th class="text-center">ประเภท</th> -->
                                 <!-- <th class="text-center">รูปภาพ</th> -->
                                 <!-- <th class="text-center">ราคา</th>
                                 <th class="text-center">ต้นทุน</th> -->
-                                <th class="text-center" style="width: 200px;">จำนวนที่สั่งซื้อสินค้า</th>
+                                <th class="text-center" style="width: 150px;">จำนวนสั่งซื้อสินค้า</th>
                                 <th class="text-center" style="width: 150px;">ราคารวม</th>
                                 <th class="text-center" >วันที่สั่งซื้อสินค้า</th>
                                 <?php if($_SESSION["status"] != "2"){ ?>
@@ -91,20 +92,20 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                     ?>
                                     <tr>
                                         <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
-                                        <td class="text-center" style="width: 90px;">pro<?= $row_orders["products_id"] ?></td>
-                                        <td class="text-center" style="width: 120px;"><?= $row_orders["products_name"] ?></td>
+                                        <td class="text-center" style="width: 120px;"><?= $row_orders["products_id"] ?></td>
+                                        <td class="text-center" style="width: 200px;"><?= $row_orders["products_name"] ?></td>
                                         <td class="text-center" style="width: 200px;"><?= $row_orders["store_name"] ?></td>
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_orders["color_name"] ?></td>
                                         <td class="text-center"><?= $row_orders["products_type_name"] ?></td> -->
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_orders['pic'] ?>')" src="./upload_img/<?= $row_orders["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
                                         <!-- <td class="text-center"><?= $row["price"] ?> บาท</td>
                                         <td class="text-center"><?= $row["cost"] ?> บาท</td> -->
-                                        <td class="text-right" style="width: 100px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
-                                        <td class="text-right" style="width: 100px;"><?= number_format($row_orders["stock_quantity"]*$row_orders["cost"],2) ?> บาท</td>
-                                        <td class="text-center" style="width: 140px;"><?= DateThaiTime($row_orders["date"]) ?></td>
+                                        <td class="text-right" style="width: 200px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
+                                        <td class="text-right" style="width: 100px;"><?= number_format($row_orders["orders_sumprice"],2) ?> </td>
+                                        <td class="text-center" style="width: 180px;"><?= DateThaiTime($row_orders["date"]) ?></td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
-                                            <a href="#" data-href="conOrders.php?action=delete&orders_id=<?= $row_orders["orders_id"] ?>&store_id=<?= $store_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
+                                            <a href="#" data-href="conOrders.php?action=delete&orders_id=<?= $row_orders["orders_id"] ?>&products_id=<?= $row_orders["products_id"] ?>&store_id=<?= $store_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
                                                                                             ลบ
                                             </a>
                                         </td>
@@ -127,9 +128,11 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                         <div class="col-md-3">
                            
                         </div>
+                        <?php if($_SESSION["status"] != "2"){ ?>
                         <div class="col-md-1">
                         <button class="btn btn-warning" onclick="onPrint()"><i class="fa fa-print"></i> พิมพ์</button>
                         </div>
+                        <?php } ?>
                         <br /><br /><br />
                     </div>
             </div>            
@@ -144,7 +147,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                 แจ้งเตือน!
             </div>
             <div class="modal-body">
-                คุณต้องการลบสินค้านี้ไหม?
+                คุณต้องการลบรายการสั่งซื้อสินค้านี้ไหม?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
@@ -207,7 +210,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                             ?>
                             <tr>
                                 <!-- <td class="text-center" style="width: 5px;"><?= $count++; ?></td> -->
-                                <td class="text-center" style="width: 90px;">pro<?= $row["products_id"] ?></td>
+                                <td class="text-center" style="width: 90px;"><?= $row["products_id"] ?></td>
                                 <td class="text-center" style="width: 120px;"><?= $row["products_name"] ?></td>
                                 <td class="text-center" style="width: 5px;"><?= $row["color_name"] ?></td>
                                 <!-- <td class="text-center"><?= $row["products_type_name"] ?></td>
@@ -327,6 +330,14 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
             '_blank' // <- This is what makes it open in a new window.
         );
     }
+
+    function AddProduct(){
+        var e = document.getElementById("store_id");
+        var store_id = e.options[e.selectedIndex].value;
+
+        window.location.replace("?viewName=addProducts&store_id="+store_id);
+    }
+
 </script>
 <script>
     $(function(){

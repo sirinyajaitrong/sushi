@@ -53,15 +53,25 @@ if ($rows_sell != false) {
             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.$row['customer_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.DateThaiTime($row["date"]).'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_quantity']).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'],2).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['cost'],2).'</td>
+            
             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'] * $row['sell_quantity'],2).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['cost'] * $row['sell_quantity'],2).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row["sell_quantity"]*($row["price"]-$row["cost"]),2).'</td>
+            
+
           </tr>';
         $i++;
     }
 }
+
+// <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
+//             <td style="border-right:1px solid #000;padding:3px;">'.$row['products_name'].'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.$row['customer_name'].'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.DateThaiTime($row["date"]).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_quantity']).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'],2).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['cost'],2).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'] * $row['sell_quantity'],2).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['cost'] * $row['sell_quantity'],2).'</td>
+//             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row["sell_quantity"]*($row["price"]-$row["cost"]),2).'</td>
 
 $mpdf = new \Mpdf\Mpdf();
 
@@ -93,16 +103,23 @@ body{
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">ชื่อลูกค้า</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="30%">วันที่ขาย</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">จำนวนขาย</td>
-    <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคาขาย</td>
-    <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคาทุน</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ยอดขาย</td>
-    <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ทุนขาย</td>
-    <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">กำไรขาย</td>
+
 </tr>
 
 </thead>
 <tbody>';
 
+// <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ที่</td>
+//     <td  width="45%" style="border-right:1px solid #000;padding:4px;text-align:center;">&nbsp;ชื่อสินค้า</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">ชื่อลูกค้า</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="30%">วันที่ขาย</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">จำนวนขาย</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคาขาย</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคาทุน</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ยอดขาย</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ทุนขาย</td>
+//     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">กำไรขาย</td>
 
 $end = "</tbody>
 
@@ -110,14 +127,15 @@ $end = "</tbody>
 </table>
 <h5 style='text-align:right' >
     <span style='text-align:right'>ยอดขายสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($total,2)." บาท</span><br />
-    <span style='text-align:right'>ทุนขายสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($cost_of_good_sold,2)." บาท</span><br />
-    <span style='text-align:right'>กำไรสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($total - $cost_of_good_sold,2)." บาท</span><br />
-    <span style='text-align:right'>(".convert(number_format($total - $cost_of_good_sold,2)).")</span>
+    <span style='text-align:right'>(".convert(number_format($total,2)).")</span>
 </h5>
 
 
 ";
 
+// <span style='text-align:right'>ทุนขายสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($cost_of_good_sold,2)." บาท</span><br />
+// <span style='text-align:right'>กำไรสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($total - $cost_of_good_sold,2)." บาท</span><br />
+// <span style='text-align:right'>(".convert(number_format($total - $cost_of_good_sold,2)).")</span>
 
 // $html = '<img src="images/brand.png" />';
 // $mpdf->WriteHTML($html);

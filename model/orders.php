@@ -18,20 +18,21 @@ class Orders {
         if ($num > 0) {
             $result = array();
             while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                $this->sql = "UPDATE orders SET stock_quantity = stock_quantity + {$data["stock_quantity"]}   
+                $this->sql = "UPDATE orders SET stock_quantity = stock_quantity + {$data["stock_quantity"]},
+                 orders_sumprice = orders_sumprice + {$data["orders_sumprice"]} 
                 WHERE orders_id =  {$row['orders_id']} ";    
             }
         }else {
-            $this->sql = "INSERT INTO orders (`store_id`, `products_id`, `stock_quantity`)
-            VALUES ({$data["store_id"]}, {$data["products_id"]}, {$data["stock_quantity"]}) ";
+            $this->sql = "INSERT INTO orders (`store_id`, `products_id`, `stock_quantity`, `orders_sumprice`)
+            VALUES ({$data["store_id"]}, {$data["products_id"]}, {$data["stock_quantity"]}, {$data["orders_sumprice"]}) ";
         }
         mysqli_query($con,"SET NAMES 'utf8'"); 
         $query = mysqli_query($con, $this->sql);
-        if($query){
-            $this->sql = "UPDATE products SET stock = stock + {$data["stock_quantity"]} 
-            WHERE products_id = {$data["products_id"]} ";
-         $query = mysqli_query($con, $this->sql);
-        }
+        // if($query){
+        //     $this->sql = "UPDATE products SET stock = stock + {$data["stock_quantity"]} 
+        //     WHERE products_id = {$data["products_id"]} ";
+        //  $query = mysqli_query($con, $this->sql);
+        // }
         if ($query) {
             $conn->close();
             return true;

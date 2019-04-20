@@ -40,13 +40,13 @@ $content = "";
 if ($rows_sell != false) {
     $i = 1;
     foreach ($rows_sell as $row) {
-        $sum_price += $row['price'] * $row['sell_quantity'];
+        $sum_price += $row['sell_sumprice'];
         $content .= '<tr style="border:1px solid #000;">
             <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
             <td style="border-right:1px solid #000;padding:3px;"  >'.$row['products_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['sell_quantity']).' แพ็ค</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['price'],2).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['price'] * $row['sell_quantity'],2).'</td>
+            <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['sell_sumprice'],2).'</td>
         </tr>';
         $i++;
     }
@@ -82,8 +82,9 @@ body{
 
 <h5 style="text-align:center" >
 <span>ลูกค้า &nbsp;'.$row_customer['customer_name'].'</span><br />
+<span>ที่อยู่ &nbsp;'.$row_customer['address'].'</span><br />
 <span>วันที่  &nbsp;'.DateThai(date("Y-m-d")).'</span>
-<span style="text-align:center"><h5 style="text-align:center">เลขที่ใบสั่งซื้อสินค้า SE'.date('Ymd').'-'.$customer_id.'</h5></span>
+<span style="text-align:center"><h5 style="text-align:center">เลขที่ใบส่งสินค้า SE'.date('Ymd').'-'.$customer_id.'</h5></span>
 </h5>
 
 

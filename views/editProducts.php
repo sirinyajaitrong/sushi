@@ -12,12 +12,12 @@ $rows_products_type = $obj->read_products_type();
 <script type="text/javascript">
 	// When the document is ready
 	$(document).ready(function () {		
-		$('#mfd').datepicker({
-			format: "yyyy-mm-dd"
-		});  
-		$('#exd').datepicker({
-			format: "yyyy-mm-dd"
-		});  
+		// $('#mfd').datepicker({
+		// 	format: "yyyy-mm-dd"
+		// });  
+		// $('#exd').datepicker({
+		// 	format: "yyyy-mm-dd"
+		// });  
 	});
 </script>
 
@@ -63,23 +63,30 @@ $rows_products_type = $obj->read_products_type();
 									</div>
 									<div class="col-md-3 f16">
 										<label>ราคา</label>
-										<input type="number" name="price" value="<?= $row["price"] ?>" class="form-control text-right" min="1"  required="" />
+										<input type="number" name="price" value="<?= $row["price"] ?>" class="form-control text-right" min="1"  required="" readonly />
 									</div>
 								</div>
 								</br>
 								<div class="row">
 									<div class="col-md-3 f16">
 										<label>ต้นทุน</label>
-										<input type="number" name="cost" value="<?= $row["cost"] ?>" class="form-control text-right" min="1"  required="" />
+										<input type="number" name="cost" value="<?= $row["cost"] ?>" class="form-control text-right" min="1"  required="" readonly />
 									</div>																			
 									<div class="col-md-3 f16">
 										<label>วันที่ผลิต</label>
-										<input type="text" id="mfd" name="mfd" value="<?= $row["mfd"] ?>" class="form-control"  required="" readonly="readonly" />
+										<input type="text" id="mfd" name="mfd" value="<?= $row["mfd"] ?>" class="form-control"  required="" readonly />
 									</div>	
 									<div class="col-md-3 f16">
 										<label>วันที่หมดอายุ</label>
-										<input type="text" id="exd" name="exd" value="<?= $row["exd"] ?>" class="form-control"  required="" readonly="readonly" />
+										<input type="text" id="exd" name="exd" value="<?= $row["exd"] ?>" class="form-control"  required="" readonly />
 									</div>
+									<div class="col-md-3 f16">
+										<label>จำนวน</label>
+										<input type="number" name="stock" class="form-control text-right" min="1" value="<?= $row["stock"] ?>"  required="" readonly />
+									</div>
+								</div>
+								</br>
+								<div class="row">
 									<div class="col-md-3 f16">
 										<?php if(!empty($row["pic"])){ ?>
 											<img src="./upload_img/<?php echo $row["pic"]; ?>" width="100" height="100" alt="">

@@ -54,7 +54,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 </script>
 
 <div class="container">
-    <h3><label class="label label-warning"  >รายงานการขายสินค้า</label></h3>
+    <h3><label class="label label-warning"  >รายงานยอดขายสินค้า</label></h3>
     <br />
     
     <div class="row">	  
@@ -131,11 +131,11 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_sell["color_name"] ?></td>
                                         <td class="text-center"><?= $row_sell["products_type_name"] ?></td> -->
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_sell['pic'] ?>')" src="./upload_img/<?= $row_sell["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
-                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["price"], 2) ?> บาท</td>
-                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["cost"], 2) ?> บาท</td>
-                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> บาท</td>
-                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["cost"],2) ?> บาท</td>
-                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*($row_sell["price"]-$row_sell["cost"]),2) ?> บาท</td>
+                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["price"], 2) ?> </td>
+                                        <td class="text-center" style="width: 110px;"><?= number_format($row_sell["cost"], 2) ?> </td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> </td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["cost"],2) ?> </td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*($row_sell["price"]-$row_sell["cost"]),2) ?> </td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
                                             <a href="#" data-href="conSell.php?action=delete&sell_id=<?= $row_sell["sell_id"] ?>&customer_id=<?= $customer_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
