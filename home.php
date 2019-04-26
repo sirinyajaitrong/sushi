@@ -55,7 +55,7 @@ $rows= $obj->read();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="?viewName=home&txt="><img src="images/brand.png"  style="text-align:center; width="auto" height="auto" ></h3></a>				
+            <a class="navbar-brand" href="?viewName=home&txt="><img src="images/brandhome.png"  style="text-align:center; width="auto" height="auto" ></h3></a>				
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

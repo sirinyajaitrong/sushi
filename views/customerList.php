@@ -37,7 +37,7 @@ $rows = $obj->read($search);
                     <th class="text-center" style="width: 100px;">คำนำหน้า</th>   
                     <th class="text-center" >ชื่อลูกค้า</th>          
                     <th class="text-center">ชื่อร้านค้า</th>
-                    <th class="text-center" style="width: 300px;">ที่อยู่</th>
+                    <th class="text-center" style="width: 330px;">ที่อยู่</th>
                     <th class="text-center" style="width: 150px;">หมายเลขโทรศัพท์</th>
                     <th class="text-center" >หมายเลขโทรศัพท์เคลื่อนที่</th>
                     <?php if($_SESSION["status"] != "2"){ ?>
@@ -53,11 +53,11 @@ $rows = $obj->read($search);
                         ?>
                         <tr>
                             <td class="text-center"><?= $count++; ?></td>
-                            <td class="text-center">cus<?= $row["customer_id"] ?></td>
+                            <td class="text-center"><?= $row["customer_id"] ?></td>
                             <td class="text-center"><?= $row["title_name"] ?></td>
                             <td class="text-center"><?= $row["customer_name"] ?></td>
                             <td class="text-center"><?= $row["name_store"] ?></td>
-                            <td class="text-left" style="width: 260px;"><?= $row["address"] ?></td>
+                            <td class="text-left" style="width: 300px;"><?= $row["address"] ?></td>
                             <td class="text-center"><?= $row["tel"] ?></td>
                             <td class="text-center"><?= $row["telephone"] ?></td>
                             <?php if($_SESSION["status"] != "2"){ ?>

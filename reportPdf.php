@@ -52,7 +52,7 @@ if ($rows_sell != false) {
             <td style="border-right:1px solid #000;padding:3px;">'.$row['products_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.$row['customer_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.DateThaiTime($row["date"]).'</td>
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_quantity']).'</td>
+            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_quantity']).' แพ็ค</td>
             
             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'] * $row['sell_quantity'],2).'</td>
             

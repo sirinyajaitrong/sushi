@@ -1,5 +1,5 @@
 <nav class="navbar-fixed-top navbar-default">
-    <div class="container-fluid" style="background-color: #ffffff; height:110px;">
+    <div class="container-fluid" style="background-color: #ffffff; height:75px; margin-top:-16px;">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -8,17 +8,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="?viewName=home&txt="><img src="images/brand.png"  style="text-align:center; width="auto" height="auto" ></h3></a>				
+            <a class="navbar-brand" href="?viewName=home&txt="><img src="images/brand.png"  style="text-align:center; margin-left:-20px;" width="auto" height="auto" ></h3></a>				
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-top:25px;font-weight: bold;font-size:16px;">
-            <ul class="nav navbar-nav">
-                <li class="1">
-                    <a href="?viewName=home"><i fa fa-home"></i> หน้าหลัก</a>
+            <ul class="nav navbar-nav" >
+                <li class="1" >
+                    <a href="?viewName=home"><i class="fa fa-home"></i> หน้าหลัก </a>
                 </li>
                 <li class="2">
-                    <a href="?viewName=userList"><i fa fa-user"></i> ผู้ใช้งาน <span class="sr-only">(current)</span></a></li>
+                    <a href="?viewName=userList"><i class="fa fa-user"></i> ผู้ใช้งาน <span class="sr-only">(current)</span></a></li>
                 </li>
                 <li class="3">
                     <a href="?viewName=customerList"><i class="fa fa-users"></i> ลูกค้า <span class="sr-only">(current)</span></a></li>
@@ -44,7 +44,7 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<br /><br /><br /><br /><br /><br />
+<br /><br /><br />
 <style type='text/css'>
 
 </style>

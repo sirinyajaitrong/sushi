@@ -29,17 +29,16 @@ requireLogin();
         <script type="text/javascript" src="js/jquery-input-mask-phone-number.js"></script>
         <script>
         $(document).ready( function () {
-            $('#myTable').DataTable({
+            $('#myTable').dataTable( {
+                "lengthChange": false,
                 "searching": true
-            });
-            
-        } );
-        $(document).ready( function () {
+            } );
             $('#myTable1').DataTable({
+                "lengthChange": false,
                 "searching": true
             });
-            
         } );
+
         </script>
     </head>
     <body>

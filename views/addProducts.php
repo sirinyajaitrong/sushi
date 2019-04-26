@@ -26,7 +26,7 @@ $store_id = !empty($_REQUEST["store_id"]) ?  $_REQUEST["store_id"] : "";
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >เพิ่มสินค้า</div>                     
+                        <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >สั่งซื้อสินค้า</div>                     
                     </div>     
 					
                     <div style="padding-top:30px" class="panel-body" >

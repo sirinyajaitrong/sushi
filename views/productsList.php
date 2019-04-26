@@ -37,7 +37,7 @@ $rows_stock = $obj_stock->read();
                 </div>
                
         </div> -->
-    <div class="table-responsive" >
+    <div class="table-responsive f16" >
         <table class="table table-bordered table-hover f16" id="myTable1">
             <thead>
                 <tr class="success">
@@ -64,7 +64,7 @@ $rows_stock = $obj_stock->read();
                     foreach ($rows as $row) {
                         if($row["stock"] < 6){
                         ?>
-                            <tr class="danger">
+                            <tr style="background-color:red;">
                         <?php }else{ ?>
                             <tr>
                         <?php } ?>
@@ -80,8 +80,8 @@ $rows_stock = $obj_stock->read();
                             <td class="text-center" style="width: 150px;"><?= DateThai($row["exd"]) ?></td>
                             <td class="text-center" style="width: 90px;"><?= $row["stock"] ?> แพ็ค</td>
                             <?php if($_SESSION["status"] != "2"){ ?>
-                            <td>
-                                <a href="index.php?viewName=editProducts&products_id=<?= $row["products_id"] ?>" class="btn btn-sm btn-success f16">
+                            <td class="text-center">
+                                <a href="index.php?viewName=editProducts&products_id=<?= $row["products_id"] ?>" class=" btn btn-sm btn-success f16">
                                     แก้ไข
                                 </a>
                                 <!-- <a href="#" data-href="conProducts.php?action=delete&products_id=<?= $row["products_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">

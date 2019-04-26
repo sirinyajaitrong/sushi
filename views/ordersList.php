@@ -28,15 +28,15 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);
 ?>
 <div class="container">
-    <h3><label class="label label-warning"  >จัดการสั่งซื้อสินค้า</label></h3>
-    <br />
+    <h3><label class="label label-warning "  >จัดการสั่งซื้อสินค้า</label></h3>
+  <p>
     
     <div class="row">	
     <?php if($_SESSION["status"] != "2"){ ?>  
-        <div class="col-md-1">
-        <label>เลือกร้านค้า: </label>
+        <div class="col-md-2 f16  text-right">
+        <label>เลือกร้านค้า : </label>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <select id="store_id" name="store_id" class="form-control" onChange="myStore()">
                 <?php
                 if ($rows_store != false) {
@@ -48,7 +48,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
         </div>
         <div class="col-md-1">
         <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">สั่งซื้อสินค้า</button> -->
-        <button type="button" class="btn btn-success" onclick="AddProduct()">สั่งซื้อสินค้า</button>
+        <button type="button" class="btn btn-success f15"  onclick="AddProduct()">สั่งซื้อสินค้า</button>
         </div>
         <div class="col-md-6">
         </div>
@@ -57,13 +57,13 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
     </div>
 </div>
 <div class="container">    
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title f20 " style="text-align: center; font-weight: bold; " >ประวัติการสั่งซื้อสินค้า</div>                     
+        <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info f16">
+                    <div class="panel-heading ">
+                        <div class="panel-title f18 " style="text-align: center; font-weight: bold; color: #101010; " >ประวัติการสั่งซื้อสินค้า</div>                     
                     </div>     
                     <br />
-                    <div class="table-responsive center" style="width: 1200px;margin-left:20px;">
+                    <div class="table-responsive center " style="width: 1200px;margin-left:20px; color: #101010;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
                             <tr class="success">
@@ -78,6 +78,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                 <th class="text-center">ต้นทุน</th> -->
                                 <th class="text-center" style="width: 150px;">จำนวนสั่งซื้อสินค้า</th>
                                 <th class="text-center" style="width: 150px;">ราคารวม</th>
+                                <th class="text-center" style="width: 150px;">ราคารวมทั้งสิ้น</th>
                                 <th class="text-center" >วันที่สั่งซื้อสินค้า</th>
                                 <?php if($_SESSION["status"] != "2"){ ?>
                                 <th class="text-center" style="width: 40px;">จัดการ</th>
@@ -102,6 +103,7 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                         <td class="text-center"><?= $row["cost"] ?> บาท</td> -->
                                         <td class="text-right" style="width: 200px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
                                         <td class="text-right" style="width: 100px;"><?= number_format($row_orders["orders_sumprice"],2) ?> </td>
+                                        <td class="text-right" style="width: 150px;"><?= number_format($row_orders["orders_total"],2) ?> </td>
                                         <td class="text-center" style="width: 180px;"><?= DateThaiTime($row_orders["date"]) ?></td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
@@ -124,21 +126,23 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                         </div>
                         <div class="col-md-1">
                         <label></label>
-                        </div>
+                        </div> 
                         <div class="col-md-3">
                            
                         </div>
+                        <div class="col-md-1">
+                           
+                           </div>
                         <?php if($_SESSION["status"] != "2"){ ?>
                         <div class="col-md-1">
                         <button class="btn btn-warning" onclick="onPrint()"><i class="fa fa-print"></i> พิมพ์</button>
                         </div>
                         <?php } ?>
-                        <br /><br /><br />
+                        <br /><br />
                     </div>
             </div>            
          </div>    
     </div>
-
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
