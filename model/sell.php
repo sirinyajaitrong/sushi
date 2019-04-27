@@ -9,6 +9,7 @@ class Sell {
         $conn = new createCon();
         $con = $conn->connect();
         mysqli_query($con,"SET NAMES 'utf8'");
+        $sell_total = $data["sell_sumprice"]*1.07;
 
         $this->sql = "SELECT * FROM sell WHERE customer_id = {$data["customer_id"]} AND products_id = {$data["products_id"]} 
          AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') AND delivery_status_id <> 1 ";
@@ -18,13 +19,15 @@ class Sell {
         if ($num > 0) {
             $result = array(); 	
             while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) { 
+                $sell_total = ($row['sell_sumprice']  + $data["sell_sumprice"]) * 1.07;
                 $this->sql = "UPDATE sell SET sell_quantity = sell_quantity + {$data["sell_quantity"]},  
-                sell_sumprice = sell_sumprice + {$data["sell_sumprice"]}    
+                sell_sumprice = sell_sumprice + {$data["sell_sumprice"]}, 
+                sell_total =  {$sell_total} 
                 WHERE sell_id =  {$row['sell_id']} ";    
             }
         }else {
-            $this->sql = "INSERT INTO sell (`customer_id`, `products_id`, `sell_quantity`, `sell_sumprice`)
-            VALUES ({$data["customer_id"]}, {$data["products_id"]}, {$data["sell_quantity"]}, {$data["sell_sumprice"]}) ";
+            $this->sql = "INSERT INTO sell (`customer_id`, `products_id`, `sell_quantity`, `sell_sumprice`, `sell_total`)
+            VALUES ({$data["customer_id"]}, {$data["products_id"]}, {$data["sell_quantity"]}, {$data["sell_sumprice"]}, {$sell_total}) ";
         }
         mysqli_query($con,"SET NAMES 'utf8'"); 
         $query = mysqli_query($con, $this->sql);
@@ -65,6 +68,24 @@ class Sell {
         $con = $conn->connect();
 
         $this->sql = "UPDATE sell SET pay = pay + {$data["pay"]}, date_pay = NOW() WHERE {$condition} ";    
+       
+        mysqli_query($con,"SET NAMES 'utf8'"); 
+		$query = mysqli_query($con,$this->sql);   
+		
+        if ($query){
+			return true;
+		}else{
+			return false;
+        }
+        
+        $conn->close();
+    }
+
+    public function update_slip($data, $condition) {
+        $conn = new createCon();
+        $con = $conn->connect();
+
+        $this->sql = "UPDATE sell SET slip = '{$data["slip"]}' WHERE {$condition} ";    
        
         mysqli_query($con,"SET NAMES 'utf8'"); 
 		$query = mysqli_query($con,$this->sql);   

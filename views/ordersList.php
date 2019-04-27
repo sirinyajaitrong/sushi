@@ -27,11 +27,12 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
 	// $strDate = "2008-08-14 13:42:44";
 	// echo "ThaiCreate.Com Time now : ".DateThai($strDate);
 ?>
-<div class="container">
-    <h3><label class="label label-warning "  >จัดการสั่งซื้อสินค้า</label></h3>
-  <p>
-    
-    <div class="row">	
+<div class="container"> <br />
+    <div class="row">
+   
+    <div class="col-md-2">
+        <label class="label label-warning" style="font-size: 18px !important;" ><b>จัดการสั่งซื้อสินค้า</b>	</label>
+    </div>
     <?php if($_SESSION["status"] != "2"){ ?>  
         <div class="col-md-2 f16  text-right">
         <label>เลือกร้านค้า : </label>
@@ -50,27 +51,27 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
         <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg">สั่งซื้อสินค้า</button> -->
         <button type="button" class="btn btn-success f15"  onclick="AddProduct()">สั่งซื้อสินค้า</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         </div>
         <?php } ?>
         <br />
     </div>
 </div>
 <div class="container">    
-        <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:5px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info f16">
                     <div class="panel-heading ">
                         <div class="panel-title f18 " style="text-align: center; font-weight: bold; color: #101010; " >ประวัติการสั่งซื้อสินค้า</div>                     
                     </div>     
-                    <br />
+                    <p>
                     <div class="table-responsive center " style="width: 1200px;margin-left:20px; color: #101010;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
                             <tr class="success">
                                 <th class="text-center">ที่</th>     
                                 <th class="text-center" style="width: 20px;">รหัสสินค้า</th>       
-                                <th class="text-center" style="width: 40px;">ชื่อสินค้า</th> 
-                                <th class="text-center" >ชื่อร้านค้า</th>            
+                                <th class="text-center" ">ชื่อสินค้า</th> 
+                                <!-- <th class="text-center" >ชื่อร้านค้า</th>             -->
                                 <!-- <th class="text-center">สี</th>
                                 <th class="text-center">ประเภท</th> -->
                                 <!-- <th class="text-center">รูปภาพ</th> -->
@@ -78,8 +79,8 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                 <th class="text-center">ต้นทุน</th> -->
                                 <th class="text-center" style="width: 150px;">จำนวนสั่งซื้อสินค้า</th>
                                 <th class="text-center" style="width: 150px;">ราคารวม</th>
-                                <th class="text-center" style="width: 150px;">ราคารวมทั้งสิ้น</th>
-                                <th class="text-center" >วันที่สั่งซื้อสินค้า</th>
+                                <th class="text-center" style="width: 150px;">ราคาทั้งหมด</th>
+                                <th class="text-center" style="width: 250px;" >วันที่สั่งซื้อสินค้า</th>
                                 <?php if($_SESSION["status"] != "2"){ ?>
                                 <th class="text-center" style="width: 40px;">จัดการ</th>
                                 <?php } ?>
@@ -95,20 +96,22 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
                                         <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
                                         <td class="text-center" style="width: 120px;"><?= $row_orders["products_id"] ?></td>
                                         <td class="text-center" style="width: 200px;"><?= $row_orders["products_name"] ?></td>
-                                        <td class="text-center" style="width: 200px;"><?= $row_orders["store_name"] ?></td>
+                                        <!-- <td class="text-center" style="width: 200px;"><?= $row_orders["store_name"] ?></td> -->
                                         <!-- <td class="text-center" style="width: 5px;"><?= $row_orders["color_name"] ?></td>
                                         <td class="text-center"><?= $row_orders["products_type_name"] ?></td> -->
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_orders['pic'] ?>')" src="./upload_img/<?= $row_orders["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
                                         <!-- <td class="text-center"><?= $row["price"] ?> บาท</td>
                                         <td class="text-center"><?= $row["cost"] ?> บาท</td> -->
-                                        <td class="text-right" style="width: 200px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
+                                        <td class="text-right" style="width: 180px;"><?= number_format($row_orders["stock_quantity"]) ?> แพ็ค</td>
                                         <td class="text-right" style="width: 100px;"><?= number_format($row_orders["orders_sumprice"],2) ?> </td>
                                         <td class="text-right" style="width: 150px;"><?= number_format($row_orders["orders_total"],2) ?> </td>
-                                        <td class="text-center" style="width: 180px;"><?= DateThaiTime($row_orders["date"]) ?></td>
+                                        <td class="text-center" style="width: 200px;"><?= DateThaiTime($row_orders["date"]) ?></td>
                                         <?php if($_SESSION["status"] != "2"){ ?>
                                         <td class="text-center" style="width: 100px;">
-                                            <a href="#" data-href="conOrders.php?action=delete&orders_id=<?= $row_orders["orders_id"] ?>&products_id=<?= $row_orders["products_id"] ?>&store_id=<?= $store_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
-                                                                                            ลบ
+                                            <a href="#" data-href="conOrders.php?action=delete&orders_id=<?= $row_orders["orders_id"] ?>
+                                            &products_id=<?= $row_orders["products_id"] ?>&store_id=<?= $store_id ?>
+                                            " data-toggle="modal" data-target="#confirm-delete" class="">
+                                            <i class="fa fa-window-close fa-lg" aria-hidden="true" style="color: #f32b2b"></i>
                                             </a>
                                         </td>
                                         <?php } ?>

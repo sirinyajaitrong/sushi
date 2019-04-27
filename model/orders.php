@@ -9,7 +9,7 @@ class Orders {
         $conn = new createCon();
         $con = $conn->connect();
         mysqli_query($con,"SET NAMES 'utf8'");
-        $orders_total = $data["orders_sumprice"]*1.7;
+        $orders_total = $data["orders_sumprice"]*1.07;
 
         $this->sql = "SELECT * FROM orders WHERE store_id = {$data["store_id"]} AND products_id = {$data["products_id"]} 
          AND DATE_FORMAT(date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ";
@@ -19,7 +19,7 @@ class Orders {
         if ($num > 0) {
             $result = array();
             while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-                $orders_total = ($row['orders_sumprice']  + $data["orders_sumprice"]) * 1.7;
+                $orders_total = ($row['orders_sumprice'] + $data["orders_sumprice"]) * 1.07;
                 $this->sql = "UPDATE orders SET stock_quantity = stock_quantity + {$data["stock_quantity"]},
                  orders_sumprice = orders_sumprice + {$data["orders_sumprice"]}, orders_total = {$orders_total} 
                 WHERE orders_id =  {$row['orders_id']} ";    

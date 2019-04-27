@@ -25,7 +25,7 @@ $rows_stock = $obj_stock->read();
 ?>
 <div class="container">
     <h3><label class="label label-warning"  >จัดการสินค้า</label></h3>
-    <br />
+    <p>
         <!-- <div class="row">
                 <div class="form-group col-md-3">
                     <input class="f17 form-control col-md-3" type="text" id="search" name="search" value="" placeholder="ค้นหาสินค้า" />
@@ -64,16 +64,16 @@ $rows_stock = $obj_stock->read();
                     foreach ($rows as $row) {
                         if($row["stock"] < 6){
                         ?>
-                            <tr style="background-color:red;">
+                            <tr style="color:red; ">
                         <?php }else{ ?>
                             <tr>
                         <?php } ?>
                             <td class="text-center" style="width: 5px;"><?= $count++; ?></td>
                             <td class="text-center" style="width: 90px;"><?= $row["products_id"] ?></td>
                             <td class="text-center" style="width: 140px;"><?= $row["products_name"] ?></td>
-                            <td class="text-center" style="width: 5px;"><?= $row["color_name"] ?></td>
-                            <td class="text-center"><?= $row["products_type_name"] ?></td>
-                            <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row['pic'] ?>')" src="./upload_img/<?= $row["pic"] ?>" width="40px;" height="40px" alt=""></td>
+                            <td class="text-center" ><?= $row["color_name"] ?></td>
+                            <td class="text-center" style="width: 80px;"><?= $row["products_type_name"] ?></td>
+                            <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row['pic'] ?>')" src="./upload_img/<?= $row["pic"] ?>" width="30px;" height="30px" alt=""></td>
                             <td class="text-center"><?= $row["price"] ?> บาท</td>
                             <td class="text-center"><?= $row["cost"] ?> บาท</td>
                             <td class="text-center" style="width: 150px;"><?= DateThai($row["mfd"]) ?></td>
@@ -81,8 +81,8 @@ $rows_stock = $obj_stock->read();
                             <td class="text-center" style="width: 90px;"><?= $row["stock"] ?> แพ็ค</td>
                             <?php if($_SESSION["status"] != "2"){ ?>
                             <td class="text-center">
-                                <a href="index.php?viewName=editProducts&products_id=<?= $row["products_id"] ?>" class=" btn btn-sm btn-success f16">
-                                    แก้ไข
+                                <a href="index.php?viewName=editProducts&products_id=<?= $row["products_id"] ?>" class="text-center">
+                                <i class="fa fa-pencil-square fa-lg" aria-hidden="true" style="color:green"></i>
                                 </a>
                                 <!-- <a href="#" data-href="conProducts.php?action=delete&products_id=<?= $row["products_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
                                                                                             ลบ

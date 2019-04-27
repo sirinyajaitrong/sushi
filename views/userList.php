@@ -16,7 +16,7 @@ $rows = $obj->read($search);
 ?>
 <div class="container">
     <h3><label class="label label-warning"  >จัดการผู้ใช้งาน</label></h3>
-    <br />
+    <p>
         <div class="row">
                 <div class="form-group col-md-3">
                     <input class="f17 form-control col-md-3" type="text" id="search" name="search" value="" placeholder="ค้นหาผู้ใช้งาน" />
@@ -63,12 +63,12 @@ $rows = $obj->read($search);
                             <td class="text-center"> <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row['pic'] ?>')" src="./upload_img/<?= $row["pic"] ?>" width="40px;" height="40px" alt=""></td>
                             <td class="text-center"><?= $row["users_status_name"] ?></td>
                             <?php if($_SESSION["status"] == "1"){ ?>
-                            <td>
-                                <a href="index.php?viewName=editUser&users_id=<?= $row["users_id"] ?>" class="btn btn-sm btn-success f16">
-                                    แก้ไข
+                            <td class="text-center">
+                                <a href="index.php?viewName=editUser&users_id=<?= $row["users_id"] ?>" class="text-center">
+                                    <i class="fa fa-pencil-square fa-lg" aria-hidden="true" style="color:green"></i>
                                 </a>
-                                <a href="#" data-href="conUser.php?action=delete&users_id=<?= $row["users_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
-                                                                                            ลบ
+                                <a href="#" data-href="conUser.php?action=delete&users_id=<?= $row["users_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="">
+                                    <i class="fa fa-window-close fa-lg" aria-hidden="true" style="color: #f32b2b"></i>
                                 </a>
                              </td>
                             <?php } ?>

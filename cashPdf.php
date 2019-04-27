@@ -60,38 +60,38 @@ body{
     font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
 }
 </style>
-
 <table style="width:100%">
   <tr>
-    <td style="text-align:center"><img src="images/brand.png" style="text-align:left" /></td>
+    <td style="text-align:right"><h5 style="text-align:center">เลขที่ CASH'.date('Ymd').'-'.$customer_id.'</h5></td>
+  </tr>
+</table>
+<table style="width:100%">
+  <tr>
+    <td style="text-align:left"><img src="images/brand.png" style="text-align:left" /></td>
+    <td style="text-align:right"><h2 style="text-align:center">ใบเสร็จรับเงิน</h2></td>
   </tr>
 </table>
 
 
-<h5 style="text-align:center" >
-<span>ร้านเดือนวัตถุดิบ</span>
+<h6 style="text-align:center" >
+<span style="text-align:center;font-size: 20px; !important;" ><b> ร้านเดือนวัตถุดิบซูชิ </b></span>
 <br />
-<span>201/147 ม.2 ต.บึง อ.ศรีราชา จ.ชลบุรี 20230</span>
+<span>ที่อยู่ : 201/147 หมู่ 2 ตำบลบึง อำเภอศรีราชา จังหวัดชลบุรี 20230</span>
 <br />
 <span>หมายเลขโทรศัพท์ : 096-987-1435</span>
 <br />
 <span>เลขประจำตัวผู้เสียภาษี : 3410600756379</span>
-</h5>
-
-<h2 style="text-align:center">ใบเสร็จรับเงิน</h2>
-
-<h5 style="text-align:center" >
+<br />
 <span>เงินสด</span>
 <br />
 <span>วันที่  &nbsp;'.DateThai(date("Y-m-d")).'</span>
-<span style="text-align:center"><h5 style="text-align:center">เลขที่ใบเสร็จรับเงิน CASH'.date('Ymd').'-'.$customer_id.'</h5></span>
-</h5>
+</h6>
 
 
 
 
 
-<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:12pt;margin-top:8px;">
+<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:10pt;margin-top:8px;">
 <tr style="border:1px solid #000;padding:4px;">
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ลำดับ</td>
     <td  width="45%" style="border-right:1px solid #000;padding:4px;text-align:center;">&nbsp;รายการ</td>
@@ -108,29 +108,28 @@ $end = "</tbody>
 
 
 </table>
-<h5 style='text-align:right' >
+<h6 style='text-align:right' >
     <span style='text-align:right'>รวมเงิน &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($sum_price,2)." บาท</span><br />
     <span style='text-align:right'>ภาษี 7% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($sum_price*0.07,2)." บาท</span><br />
-    <span style='text-align:right'>รวมราคาทั้งสิ้น &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($sum_price*1.07,2)." บาท</span><br />
+    <span style='text-align:right'>รวมราคาทั้งสิ้น &nbsp;&nbsp;".number_format($sum_price*1.07,2)." บาท</span>&nbsp;&nbsp;
     <span style='text-align:right'>(".convert(number_format($sum_price*1.07,2)).")</span>
-</h5>
+</h6>
 
-
-<br />
-<h5 style='text-align:center' >
-<span style='text-align:center'>พนักงาน</span><br />
-</h5>
-<h5 style='text-align:center' >
-<span style='text-align:center'>(__________________________) </span><br />
-</h5>
-
-<br />
-<h5 style='text-align:center' >
+<h6 style='text-align:center' >
+<span style='text-align:center'>พนักงาน</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <span style='text-align:center'>ผู้รับสินค้า</span><br />
-</h5>
-<h5 style='text-align:center' >
+</h6>
+<h6 style='text-align:center' >
+<span style='text-align:center'>(__________________________) </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <span style='text-align:center'>(__________________________) </span><br />
-</h5>
+</h6>
+
+
 
 ";
 

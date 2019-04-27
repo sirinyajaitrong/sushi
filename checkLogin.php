@@ -2,6 +2,10 @@
 include "./lib/std.php";
 include "./lib/helper.php";
 include "./lib/dbConnector.php";
+include "./model/login.php";
+
+$obj_login = new Login();
+
 $username = $_REQUEST["username"];
 $password = $_REQUEST["password"];
 ?>
@@ -61,15 +65,21 @@ $password = $_REQUEST["password"];
 							$count = mysqli_num_rows($query);
 							//var_dump($count);
 							if ($count > 0) {
-								$_SESSION["logedIn"] = true;
-								$_SESSION["isAdmin"] = true;
-								while ($row = mysqli_fetch_assoc($query)) {
-									$_SESSION["email"] = $row['email'];
-									$_SESSION["status"] = $row['status'];
-									$_SESSION["users_status_name"] = $row['users_status_name'];
-									$_SESSION["users_id"] = $row['users_id'];
-								}
-							redirect("index.php?viewName=home");
+									$_SESSION["logedIn"] = true;
+									$_SESSION["isAdmin"] = true;
+									while ($row = mysqli_fetch_assoc($query)) {
+										$_SESSION["email"] = $row['email'];
+										$_SESSION["status"] = $row['status'];
+										$_SESSION["users_status_name"] = $row['users_status_name'];
+										$_SESSION["users_id"] = $row['users_id'];
+									}
+									$data = array(
+											"email" => !empty($username) ?  $username : "",
+											"password" => !empty($password) ?  $password : ""
+									);
+									$obj_login->insert($data);
+
+									redirect("index.php?viewName=home");
 							} 
 							else {
 								echo "<script type='text/javascript'>

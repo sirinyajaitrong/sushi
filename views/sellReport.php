@@ -55,11 +55,10 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 
 <div class="container">
     <h3><label class="label label-warning"  >รายงานยอดขายสินค้า</label></h3>
-    <br />
-    
+    <p>
     <div class="row">	  
         <div class="col-md-1 f16">
-        <label>เลือกวันที่: </label>
+        <label>เลือกวันที่ : </label>
         </div>
         <div class="col-md-2 f16">
             <div class="hero-unit">
@@ -86,12 +85,12 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 
 
 <div class="container">    
-        <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:5px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info f16" >
                     <div class="panel-heading">
                         <div class="panel-title f18 " style="text-align: center; font-weight: bold; color: #101010; " >ประวัติการขายสินค้า</div>                     
                     </div>     
-                    <br />
+                    <p>
                     <div class="table-responsive center" style="width: 1200px;margin-left:20px; color: #101010;">
                     <table class="table table-bordered table-hover f16 center" id="myTable">
                         <thead>
@@ -111,7 +110,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                 <!-- <th class="text-center">ทุนขาย</th>
                                 <th class="text-center">กำไรขาย</th> -->
                                 <?php if($_SESSION["status"] != "2"){ ?>
-                                <th class="text-center">จัดการ</th>
+                                <!-- <th class="text-center">จัดการ</th> -->
                                 <?php } ?>
                             </tr>
                         </thead>
@@ -133,15 +132,15 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                                         <!-- <td class="text-center" > <img style="border-radius: 50%;" onclick="showPic('./upload_img/<?= $row_sell['pic'] ?>')" src="./upload_img/<?= $row_sell["pic"] ?>" width="40px;" height="40px" alt=""></td> -->
                                         <!-- <td class="text-center" style="width: 110px;"><?= number_format($row_sell["price"], 2) ?> </td>
                                         <td class="text-center" style="width: 110px;"><?= number_format($row_sell["cost"], 2) ?> </td> -->
-                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["price"],2) ?> </td>
+                                        <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_total"],2) ?> </td>
                                         <!-- <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*$row_sell["cost"],2) ?> </td>
                                         <td class="text-right" style="width: 110px;"><?= number_format($row_sell["sell_quantity"]*($row_sell["price"]-$row_sell["cost"]),2) ?> </td> -->
                                         <?php if($_SESSION["status"] != "2"){ ?>
-                                        <td class="text-center" style="width: 10px;">
+                                        <!-- <td class="text-center" style="width: 10px;">
                                             <a href="#" data-href="conSell.php?action=delete&sell_id=<?= $row_sell["sell_id"] ?>&customer_id=<?= $customer_id ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
                                                                                             ลบ
                                             </a>
-                                        </td>
+                                        </td> -->
                                         <?php } ?>
                                     </tr>
                                     <?php
@@ -186,7 +185,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
                 แจ้งเตือน!
             </div>
             <div class="modal-body">
-                คุณต้องการลบสินค้านี้ไหม?
+                คุณต้องการลบรายการขายสินค้านี้ไหม?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

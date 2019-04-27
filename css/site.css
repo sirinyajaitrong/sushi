@@ -26,6 +26,11 @@ li:hover {
   text-decoration:underline;
   background-color:#9bd5f1a4 !important;
 }
+.f10 {
+  font-size: 10px !important;
+  /* color: #000 !important; */
+  font-family: Arial !important;
+}
 .f14 {
   font-size: 14px !important;
   /* color: #000 !important; */

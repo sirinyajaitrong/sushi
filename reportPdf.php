@@ -45,7 +45,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 if ($rows_sell != false) {
     $i = 1;
     foreach ($rows_sell as $row) {
-        $total += $row['price'] * $row['sell_quantity'];
+        $total += $row['sell_total'];
         $cost_of_good_sold += $row['cost'] * $row['sell_quantity'];
         $content .= '<tr style="border:1px solid #000;">
             <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
@@ -54,7 +54,7 @@ if ($rows_sell != false) {
             <td style="border-right:1px solid #000;padding:3px;text-align:center;">'.DateThaiTime($row["date"]).'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_quantity']).' แพ็ค</td>
             
-            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['price'] * $row['sell_quantity'],2).'</td>
+            <td style="border-right:1px solid #000;padding:3px;text-align:right;">'.number_format($row['sell_total'],2).'</td>
             
 
           </tr>';
@@ -84,21 +84,20 @@ body{
 
 <table style="width:100%">
   <tr>
-    <td style="text-align:center"><img src="images/brand.png" style="text-align:left" /></td>
-    
+    <td style="text-align:left"><img src="images/brand.png" style="text-align:left" /></td>
+    <td style="text-align:right"><h5 style="text-align:center">เลขที่ RE'.date('Ymd').'-'.$_SESSION["users_id"].'</h5></td>
   </tr>
 </table>
 
 
 <h2 style="text-align:center">รายงานสรุปยอดขายสินค้า</h2>
 
-<h5 style="text-align:center">ประจำวันที่ '.DateThai($dateF).' - '.DateThai($dateT).' </h5>
+<h6 style="text-align:center">ประจำวันที่ '.DateThai($dateF).' - '.DateThai($dateT).' </h6>
 
-<h5 style="text-align:center">เลขที่ RE'.date('Ymd').'-'.$_SESSION["users_id"].'</h5>
 
-<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:12pt;margin-top:8px;">
+<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:10pt;margin-top:8px;">
 <tr style="border:1px solid #000;padding:4px;">
-    <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ที่</td>
+    <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ลำดับ</td>
     <td  width="45%" style="border-right:1px solid #000;padding:4px;text-align:center;">&nbsp;ชื่อสินค้า</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">ชื่อลูกค้า</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="30%">วันที่ขาย</td>
@@ -126,7 +125,7 @@ $end = "</tbody>
 
 </table>
 <h5 style='text-align:right' >
-    <span style='text-align:right'>ยอดขายสุทธิ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($total,2)." บาท</span><br />
+    <span style='text-align:right'>ยอดขายสุทธิ &nbsp;&nbsp;".number_format($total,2)." บาท</span>&nbsp;&nbsp;
     <span style='text-align:right'>(".convert(number_format($total,2)).")</span>
 </h5>
 

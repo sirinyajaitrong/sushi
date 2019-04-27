@@ -16,7 +16,7 @@ $rows = $obj->read($search);
 ?>
 <div class="container">
     <h3><label class="label label-warning"  >จัดการลูกค้า</label></h3>
-    <br />
+    <p>
     <div class="row">
                 <div class="form-group col-md-3">
                     <input class="f17 form-control col-md-3" type="text" id="search" name="search" value="" placeholder="ค้นหาผู้ใช้งาน" />
@@ -61,12 +61,12 @@ $rows = $obj->read($search);
                             <td class="text-center"><?= $row["tel"] ?></td>
                             <td class="text-center"><?= $row["telephone"] ?></td>
                             <?php if($_SESSION["status"] != "2"){ ?>
-                            <td>
-                                <a href="index.php?viewName=editCustomer&customer_id=<?= $row["customer_id"] ?>" class="btn btn-sm btn-success f16">
-                                    แก้ไข
+                            <td class="text-center">
+                                <a href="index.php?viewName=editCustomer&customer_id=<?= $row["customer_id"] ?>" class="text-center">
+                                <i class="fa fa-pencil-square fa-lg" aria-hidden="true" style="color:green"></i>
                                 </a>
-                                <a href="#" data-href="conCustomer.php?action=delete&customer_id=<?= $row["customer_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-sm btn-danger f16">
-                                                                                            ลบ
+                                <a href="#" data-href="conCustomer.php?action=delete&customer_id=<?= $row["customer_id"] ?>" data-toggle="modal" data-target="#confirm-delete" class="">
+                                <i class="fa fa-window-close fa-lg" aria-hidden="true" style="color: #f32b2b"></i>
                                 </a>
                             </td>
                             <?php } ?>
