@@ -53,11 +53,12 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 	});
 </script>
 
-<div class="container">
-    <h3><label class="label label-warning"  >รายงานยอดขายสินค้า</label></h3>
-    <p>
-    <div class="row">	  
-        <div class="col-md-1 f16">
+<div class="container">  <br />
+    <div class="row">	 
+    <div class="col-md-2">
+        <label class="label label-warning" style="font-size: 18px !important;" >รายงานยอดขายสินค้า</label>
+    </div>
+        <div class="col-md-2 f16 text-right">
         <label>เลือกวันที่ : </label>
         </div>
         <div class="col-md-2 f16">
@@ -77,7 +78,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
         <div class="col-md-1">
         <button type="button" class="btn btn-primary" onclick="search()" style="margin-top:24px;">ค้นหา</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
         </div>
         <br />
     </div>

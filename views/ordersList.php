@@ -29,7 +29,6 @@ $rows_orders = $obj_orders->read(" o.store_id = {$store_id} ");
 ?>
 <div class="container"> <br />
     <div class="row">
-   
     <div class="col-md-2">
         <label class="label label-warning" style="font-size: 18px !important;" ><b>จัดการสั่งซื้อสินค้า</b>	</label>
     </div>
