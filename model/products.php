@@ -121,6 +121,54 @@ class Products {
     }
 
     
+    public function read_sell($condition = "1=1 ") {
+		$conn = new createCon();
+        $con = $conn->connect();
+
+        $this->sql = "SELECT * FROM  products p LEFT OUTER JOIN color c ON p.color_id = c.color_id 
+          LEFT OUTER JOIN products_type pt ON p.products_type_id = pt.products_type_id  
+          WHERE $condition AND p.stock > 0 ORDER BY p.products_name, p.products_id ";
+          mysqli_query($con,"SET NAMES 'utf8'");
+        $query = mysqli_query($con,$this->sql);
+        if ($query) {
+            $result = array();
+            $products_name = "";
+            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {    
+                if($row["products_name"] != $products_name){
+                    $result[] = $row;
+                 }          
+                 $products_name = $row["products_name"];
+            }
+            return $result;
+        } else {
+            return false;
+        }       
+        
+		$conn->close();
+    }
+
+//name_products
+    public function read_name_products($condition = "1=1 ") {
+        $conn = new createCon();
+        $con = $conn->connect();
+
+        $this->sql = "SELECT * FROM  name_products 
+        WHERE $condition ";
+        mysqli_query($con,"SET NAMES 'utf8'");
+        $query = mysqli_query($con,$this->sql);
+        if ($query) {
+            $result = array();
+            while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                $result[] = $row;
+            }
+            return $result;
+        } else {
+            return false;
+        }       
+        
+        $conn->close();
+    }
+    
     public function read_color($condition = "1=1 ") {
 		$conn = new createCon();
         $con = $conn->connect();

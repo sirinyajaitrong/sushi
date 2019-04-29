@@ -60,6 +60,11 @@ if ($rows_sell != false) {
           </tr>';
         $i++;
     }
+    $content .= '
+    <tr>
+        <td style="border: 0px solid black;" colspan="5" ></td>
+        <td style="border:1px solid #000;padding:3px;text-align:right;"  >'.number_format($total,2).'</td>
+    </tr>';
 }
 
 // <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
@@ -103,6 +108,7 @@ body{
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="30%">วันที่ขาย</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">จำนวนขาย</td>
     <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ยอดขาย</td>
+    
 
 </tr>
 

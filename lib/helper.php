@@ -87,6 +87,4 @@ function DateThaiTime($strDate)
 		return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
 }
 
-
-
 ?>

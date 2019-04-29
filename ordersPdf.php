@@ -41,7 +41,8 @@ if ($rows_orders != false) {
     $i = 1;
     foreach ($rows_orders as $row) {
         $sum_price += $row['orders_sumprice'];
-        $content .= '<tr style="border:1px solid #000;">
+        $content .= '
+        <tr style="border:1px solid #000;">
             <td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
             <td style="border-right:1px solid #000;padding:3px;"  >'.$row['products_name'].'</td>
             <td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['stock_quantity']).' แพ็ค</td>
@@ -50,6 +51,11 @@ if ($rows_orders != false) {
         </tr>';
         $i++;
     }
+    $content .= '
+    <tr>
+        <td style="border: 0px solid black;" colspan="4" ></td>
+        <td style="border:1px solid #000;padding:3px;text-align:right;"  >'.number_format($sum_price,2).'</td>
+    </tr>';
 }
 
 $mpdf = new \Mpdf\Mpdf();
@@ -112,11 +118,7 @@ body{
 
 </thead>
 <tbody>';
-
-
 $end = "</tbody>
-
-
 </table>
 <h6 style='text-align:right' >
     <span style='text-align:right'>รวมเงิน &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".number_format($sum_price,2)." บาท</span><br />

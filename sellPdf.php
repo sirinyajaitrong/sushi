@@ -50,6 +50,11 @@ if ($rows_sell != false) {
         </tr>';
         $i++;
     }
+    $content .= '
+    <tr>
+        <td style="border: 0px solid black;" colspan="4" ></td>
+        <td style="border:1px solid #000;padding:3px;text-align:right;"  >'.number_format($sum_price,2).'</td>
+    </tr>';
 }
 
 $mpdf = new \Mpdf\Mpdf();

@@ -86,7 +86,7 @@ $rows_sell = $obj_sell->read(" DATE_FORMAT(date,'%Y-%m-%d') >= '".$dateF."' AND 
 
 
 <div class="container">    
-        <div id="loginbox" style="margin-top:5px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info f16" >
                     <div class="panel-heading">
                         <div class="panel-title f18 " style="text-align: center; font-weight: bold; color: #101010; " >ประวัติการขายสินค้า</div>                     

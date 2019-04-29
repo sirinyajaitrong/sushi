@@ -101,13 +101,9 @@ $rows_status = $obj->read_users_status();
 
                         </div>                     
                     </div>  
-        </div>
-
-                   
-                
+        </div>      
          </div> 
 </div>
-
 <script>
 //  $('.phone').mask('(999) 999-9999');
     $(document).ready(function () {

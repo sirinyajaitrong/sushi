@@ -16,7 +16,7 @@ $search = " 1=1 ";
 //     OR products_name LIKE '%".$txt."%' ";
 // }
 $customer_id = !empty($_REQUEST["customer_id"]) ?  $_REQUEST["customer_id"] : "";
-$rows = $obj->read();
+$rows = $obj->read_sell();
 $rows_customer = $obj_customer->read();
 if($customer_id == ""){
     $customer_id = $rows_customer[0]['customer_id'];
@@ -56,7 +56,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
     </div>
 </div>
 <div class="container-full">    
-        <div id="loginbox" style="margin-top:5px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-12 col-md-offset-0 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info f16" >
                     <div class="panel-heading">
                         <div class="panel-title f18 " style="text-align: center; font-weight: bold; color: #101010;" >ประวัติการขายสินค้า</div>                     
@@ -152,7 +152,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                                                         </span>
                                                     <?php } ?>
                                                 <span onclick="AddPaySlip('<?= $row_sell["sell_id"] ?>', '<?= $row_sell["products_name"] ?>')" class="">
-                                                <i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color: #1055f5"></i>
+                                                <i class="fa fa-file-image-o fa-lg" aria-hidden="true" style="color: #4506ff"></i>
                                                     </span>
                                             <?php } ?>
                                             
@@ -164,7 +164,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
                                         </td>    
                                             <?php } else{ ?> <td class="text-center">
                                                 <span onclick="" class="btn btn-defale" readonly>
-                                                    <i class="fa fa-paypal fa-lg" aria-hidden="true" style="color: #ddd"></i>
+                                                    <i class="fa fa-paypal fa-lg" aria-hidden="true" style="color: #7d7979"></i>
                                                 </span>
                                             </td> <?php } ?>
                                     </tr>
@@ -261,7 +261,7 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-        <div class="table-responsive center" style="width: 800px;margin-left:50px;margin-top:20px;">
+        <div class="table-responsive center" style="width: 800px;margin-left:50px;margin-top:10px;">
             <table class="table table-bordered table-hover f16" id="myTable1">
                 <thead>
                     <tr class="success">
@@ -412,15 +412,16 @@ $rows_sell = $obj_sell->read(" s.customer_id = {$customer_id} ");
       <form action="conSell.php" method="post" class="form form-horizontal" enctype="multipart/form-data">	
       <div><input type="hidden" id="sell_id_s" name="sell_id_s" value="" /></div>
       <div><input type="hidden" id="customer_id_s" name="customer_id_s" value="" /></div>
-      <div><input type="hidden" id="action" name="action" value="add_slip" /></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-6 f16">
-                <label>ใบเสร็จ</label>
-                <input type="file" id="slip" name="slip"  class="form-control text-right"  required="" />
+      <div class="row"><input type="hidden" id="action" name="action" value="add_slip" /></div> 
+            <div class="col-md-2 f16"></div>
+            <div class="col-md-2 f16">
+                <label>ใบเสร็จ : </label>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-6 f16">
+                <input type="file" id="slip" name="slip"  class="form-control text-right"  required="" />
+            </div>     
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="margin-top:20px;">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
         <button type="submit" class="btn btn-primary" >บันทึก</button>
       </div>

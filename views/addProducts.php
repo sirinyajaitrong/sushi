@@ -7,6 +7,7 @@ $obj = new Products();
 
 $rows_color = $obj->read_color();
 $rows_products_type = $obj->read_products_type();
+$rows_name_products = $obj->read_name_products();
 $store_id = !empty($_REQUEST["store_id"]) ?  $_REQUEST["store_id"] : "";
 
 ?>
@@ -38,7 +39,14 @@ $store_id = !empty($_REQUEST["store_id"]) ?  $_REQUEST["store_id"] : "";
 								<div class="row">	
 									<div class="col-md-3 f16">
 										<label>ชื่อสินค้า</label>
-										<input type="text" name="products_name" value="" class="form-control"  required="" />
+										<select id="products_name" name="products_name" class="form-control">
+											<?php
+											if ($rows_name_products != false) {
+												foreach ($rows_name_products as $row_name_products) {
+												?>				
+												<option value="<?= $row_name_products["name"] ?>" ><?= $row_name_products["name"] ?></option>
+											<?php } } ?>
+										</select> 
 									</div>
 									<div class="col-md-3 f16">
 										<label>สี</label>

@@ -12,7 +12,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-top:25px;font-weight: bold;font-size:16px;">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-top:25px;font-weight: bold;font-size:18px; ">
             <ul class="nav navbar-nav" >
                 <li class="1" >
                     <a href="?viewName=home"><i class="fa fa-home"></i> หน้าหลัก </a>
